@@ -1,4 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
+  if (isLoggedIn) {
+    window.location.href = "./index.html"; // Redirigir a la página de inicio
+    return;
+  } else {
+    document.querySelector('input[name="email"]').value =
+      localStorage.getItem("savedEmail");
+    document.querySelector('input[name="password"]').value =
+      localStorage.getItem("savedPassword");
+  }
   const inicioSesion = document.getElementById("iniciar_sesion"); // submit
 
   inicioSesion.addEventListener("click", function (event) {
@@ -9,7 +19,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (email.includes("@") && password) {
       // evalua que sea correcto (condicion que siempre se cumple)
+      if (document.getElementById("recordarme").checked) {
+        localStorage.setItem("savedEmail", email);
+        localStorage.setItem("savedPassword", password);
+      } else {
+        localStorage.removeItem("savedEmail");
+        localStorage.removeItem("savedPassword");
+      }
+      localStorage.setItem("isLoggedIn", true); // guarda el estado de la sesion
       window.location.href = "./index.html"; // redirecciona al index
+      return;
     } else {
       const mensajeError = document.createElement("p"); // crea un mensaje de error
       mensajeError.textContent =
@@ -23,15 +42,4 @@ document.addEventListener("DOMContentLoaded", () => {
       }, 2000);
     }
   });
-});
-
-/* faltaría que guarde el "Recordarme", y si eso pasa, que el usuario al entrar al login,
-lo rediriga a la pagina, no se como hacerlo */
-
-regBtn.addEventListener("click", function loginUser() {
-  // *PENDIENTE* Validar login
-
-  // Guarda el estado de la sesión en el storage del navegador
-  localStorage.setItem("isLoggedIn", "true");
-  window.location.href = "index.html"; // Ir a la página principal
 });
