@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 document.addEventListener("DOMContentLoaded", () => {
     const inicioSesion = document.getElementById("iniciar_sesion"); // submit
 
@@ -24,3 +25,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /* faltaría que guarde el "Recordarme", y si eso pasa, que el usuario al entrar al login,
 lo rediriga a la pagina, no se como hacerlo */
+=======
+regBtn.addEventListener("click", function loginUser() {
+  // *PENDIENTE* Validar login
+
+  // Guarda el estado de la sesión en el storage del navegador
+  localStorage.setItem("isLoggedIn", "true");
+  window.location.href = "index.html"; // Ir a la página principal
+});
+>>>>>>> Stashed changes
