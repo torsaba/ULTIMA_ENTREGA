@@ -26,9 +26,9 @@ function showProductList(array) {
 }
 
 document.addEventListener("DOMContentLoaded", function (e) {
-  const selectedCatID = localStorage.getItem("selectedCatID");
-  if (selectedCatID) {
-      const LIST_URL = `https://japceibal.github.io/emercado-api/cats_products/${selectedCatID}.json`;
+  const CatID = localStorage.getItem("CatID");
+  if (CatID) {
+      const LIST_URL = `https://japceibal.github.io/emercado-api/cats_products/${CatID}.json`;
 
       getJSONData(LIST_URL)
           .then(function (resultObj) {
