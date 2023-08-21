@@ -14,23 +14,83 @@
     />
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
-    <style>
-      body {
-        background-color: rgb(248, 249, 250);
-      }
-    </style>
+    <link href="css/login.css" rel="stylesheet" />
+    <script src="js/login.js"></script>
   </head>
 
   <body>
     <main class="mt-5">
       <div class="container">
-        <div class="alert alert-danger text-center" role="alert">
-          <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+        <div class="text-center">
+          <form id="formulario">
+            <img id="loginImg" src="img/login.png" />
+
+            <h3>Iniciar sesión</h3>
+
+            <div id="email" class="form_info">
+              <label for="email">
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Usuario o email"
+                  required
+                />
+              </label>
+            </div>
+
+            <div id="password" class="form_info">
+              <label for="password">
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="Contraseña"
+                  required
+                />
+              </label>
+            </div>
+
+            <div class="checkbox-wrapper-37">
+              <input id="recordarme" name="checkbox" type="checkbox" />
+              <label class="terms-label" for="recordarme">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 200 200"
+                  class="checkbox-svg"
+                >
+                  <mask fill="white" id="path-1-inside-1_476_5-37">
+                    <rect height="200" width="200"></rect>
+                  </mask>
+                  <rect
+                    mask="url(#path-1-inside-1_476_5-37)"
+                    stroke-width="40"
+                    class="checkbox-box"
+                    height="200"
+                    width="200"
+                  ></rect>
+                  <path
+                    stroke-width="15"
+                    d="M52 111.018L76.9867 136L149 64"
+                    class="checkbox-tick"
+                  ></path>
+                </svg>
+                <span class="label-text">Recordarme</span>
+              </label>
+            </div>
+
+            <button class="cta" id="iniciar_sesion">
+              <span>Iniciar sesión</span>
+              <svg viewBox="0 0 13 10" height="10px" width="15px">
+                <path d="M1,5 L11,5"></path>
+                <polyline points="8 1 12 5 8 9"></polyline>
+              </svg>
+            </button>
+          </form>
         </div>
       </div>
     </main>
     <footer class="text-muted">
-      <div class="container">
+      <div class="footer">
         <p class="float-end">
           <a href="#">Volver arriba</a>
         </p>
@@ -42,6 +102,5 @@
         </p>
       </div>
     </footer>
-    <script src="js/login.js"></script>
   </body>
 </html>
