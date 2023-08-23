@@ -26,6 +26,12 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.removeItem("savedEmail");
         localStorage.removeItem("savedPassword");
       }
+
+      const username = obtenerNombreDeUsuario(email); // Obtener el nombre de usuario
+
+      
+      localStorage.setItem("username", username); // Guardar el nombre de usuario
+
       localStorage.setItem("isLoggedIn", true); // guarda el estado de la sesion
       window.location.href = "./index.html"; // redirecciona al index
       return;
@@ -43,3 +49,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+function obtenerNombreDeUsuario(email) {
+  // Aquí simulamos que obtenemos el nombre de usuario basado en el correo electrónico
+  // Puedes reemplazar esto con llamadas a servicios, consultas a base de datos, etc.
+  const usuariosRegistrados = {
+    "usuario1@example.com": "Usuario1",
+  };
+  
+  return usuariosRegistrados[email] || email; // Devuelve el nombre de usuario o el correo si no existe
+}
