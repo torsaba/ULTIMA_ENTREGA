@@ -41,25 +41,22 @@
             <li class="nav-item">
               <a class="nav-link" href="sell.html">Vender</a>
             </li>
-
-            
-            <!-- Enlace para mostrar el botón de cerrar sesión -->
-            <a class="nav-link" href="#" onclick="toggleLogoutButton()">
-              <!-- Div donde se mostrará el nombre de usuario -->
-              <div id="username-display" class="navbar-text"></div>
-            </a>
-            <!-- Botón de cerrar sesión (oculta inicialmente style="display: none;") -->
-            <button
-              id="logout-button"
-         
-              style="display: none;"
+            <li
+              class="nav-item"
+              onmouseenter="toggleLogoutButton()"
+              onmouseleave="toggleLogoutButton()"
             >
-            
-            <a class="nav-link" href="login.html" onclick="logout()"
-            >Cerrar sesión</a>
-                    </button>
-
-                    
+              <!-- Enlace para mostrar el botón de cerrar sesión -->
+              <a class="nav-link" id="username-display" href="#"> </a>
+              <!-- Botón de cerrar sesión (oculta inicialmente style="display: none;") -->
+              <a
+                style="display: none"
+                class="nav-link"
+                id="logout-button"
+                href="login.html"
+                onclick="logout()"
+                >Cerrar sesión</a
+              >
             </li>
           </ul>
         </div>
