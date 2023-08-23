@@ -50,4 +50,27 @@ document.addEventListener("DOMContentLoaded", function (e) {
               console.error("Error retrieving data:", error);
           });
   }
+  function ordenarPorPrecioAscendente() {
+    productsArray.sort((a, b) => a.cost - b.cost);
+    showProductList(productsArray);
+  }
+
+  function ordenarPorPrecioDescendente() {
+    productsArray.sort((a, b) => b.cost - a.cost);
+    showProductList(productsArray);
+  }
+
+  function ordenarPorCantidadVendida() {
+    productsArray.sort((a, b) => b.soldCount - a.soldCount);
+    showProductList(productsArray);
+  }
+
+  const sortByCountBtn = document.getElementById("sortByCount");
+  const sortByPriceAscBtn = document.getElementById("sortByPriceAsc");
+  const sortByPriceDescBtn = document.getElementById("sortByPriceDesc");
+
+  sortByCountBtn.addEventListener("click", ordenarPorCantidadVendida);
+  sortByPriceAscBtn.addEventListener("click", ordenarPorPrecioAscendente);
+  sortByPriceDescBtn.addEventListener("click", ordenarPorPrecioDescendente);
+
 });
