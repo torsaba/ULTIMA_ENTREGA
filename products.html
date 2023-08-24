@@ -73,33 +73,43 @@
                   placeholder="Buscar productos..."
                 />
               </label>
-              <label class="btn btn-light active" for="sortByCount">
-                <input
-                  type="radio"
-                  class="btn-check"
-                  name="options"
-                  id="sortByCount"
-                  checked
-                />
-                <i class="fas fa-sort-amount-down mr-1"></i> Mas vendido
-              </label>
-              <label class="btn btn-light" for="sortByPriceAsc">
-                <input
-                  type="radio"
-                  class="btn-check"
-                  name="options"
-                  id="sortByPriceAsc"
-                />
-                <i class="fas fa-sort-amount-up-alt mr-1"></i>$
-              </label>
-              <label class="btn btn-light" for="sortByPriceDesc">
-                <input
-                  type="radio"
-                  class="btn-check"
-                  name="options"
-                  id="sortByPriceDesc"
-                />
-                <i class="fas fa-sort-amount-down mr-1"></i> $
+              <label for="orderBy">
+                <select
+                  name="Ordenar"
+                  id="orderBy"
+                  class="form-select"
+                  style="margin-top: 2%"
+                >
+                  <option disabled selected>Ordenar por:</option>
+                  <option
+                    name="options"
+                    value="sortByCountAsc"
+                    id="sortByCount"
+                  >
+                    Más vendidos
+                  </option>
+                  <option
+                    name="options"
+                    value="sortByCountDesc"
+                    id="sortByCount"
+                  >
+                    Menos vendidos
+                  </option>
+                  <option
+                    value="sortByPriceDesc"
+                    name="options"
+                    id="sortByPriceDesc"
+                  >
+                    Mayor precio
+                  </option>
+                  <option
+                    name="options"
+                    value="sortByPriceAsc"
+                    id="sortByPriceAsc"
+                  >
+                    Menor precio
+                  </option>
+                </select>
               </label>
             </div>
           </div>

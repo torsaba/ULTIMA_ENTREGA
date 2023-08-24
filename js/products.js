@@ -15,7 +15,7 @@ function showProductList(array) {
                 <h4>${product.name} - ${product.currency} ${product.cost}</h4>
                 <p>${product.description}</p>
               </div>
-              <small class="text-muted">${product.soldCount} artículos</small>
+              <small class="text-muted">${product.soldCount} vendidos</small>
             </div>
           </div>
         </div>
@@ -24,7 +24,7 @@ function showProductList(array) {
   document.getElementById("pro-list-container").innerHTML = htmlContentToAppend;
 }
 
-document.addEventListener("DOMContentLoaded", function (e) {
+document.addEventListener("DOMContentLoaded", function () {
   const CatID = localStorage.getItem("CatID");
   if (CatID) {
     const LIST_URL = `https://japceibal.github.io/emercado-api/cats_products/${CatID}.json`;
@@ -62,19 +62,28 @@ document.addEventListener("DOMContentLoaded", function (e) {
     showProductList(productsArray);
   }
 
-  function ordenarPorCantidadVendida() {
+  function ordenarPorMasVendidos() {
     productsArray.sort((a, b) => b.soldCount - a.soldCount);
     showProductList(productsArray);
   }
 
-  const sortByCountBtn = document.getElementById("sortByCount");
-  const sortByPriceAscBtn = document.getElementById("sortByPriceAsc");
-  const sortByPriceDescBtn = document.getElementById("sortByPriceDesc");
+  function ordenarPorMenosVendidos() {
+    productsArray.sort((a, b) => a.soldCount - b.soldCount);
+    showProductList(productsArray);
+  }
 
-  sortByCountBtn.addEventListener("click", ordenarPorCantidadVendida);
-  sortByPriceAscBtn.addEventListener("click", ordenarPorPrecioAscendente);
-  sortByPriceDescBtn.addEventListener("click", ordenarPorPrecioDescendente);
-
+  const orderBy = document.getElementById("orderBy");
+  orderBy.addEventListener("change", () => {
+    if (orderBy.value === "sortByPriceAsc") {
+      ordenarPorPrecioAscendente();
+    } else if (orderBy.value === "sortByPriceDesc") {
+      ordenarPorPrecioDescendente();
+    } else if (orderBy.value === "sortByCountAsc") {
+      ordenarPorMasVendidos();
+    } else if (orderBy.value === "sortByCountDesc") {
+      ordenarPorMenosVendidos();
+    }
+  });
   const productSearch = document.getElementById("productSearch");
 
   productSearch.addEventListener("input", (e) => {

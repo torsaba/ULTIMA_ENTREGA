@@ -49,14 +49,20 @@
               <!-- Enlace para mostrar el botón de cerrar sesión -->
               <a class="nav-link" id="username-display" href="#"> </a>
               <!-- Botón de cerrar sesión (oculta inicialmente style="display: none;") -->
-              <a
-                style="display: none"
-                class="nav-link"
+              <ul
                 id="logout-button"
-                href="login.html"
-                onclick="logout()"
-                >Cerrar sesión</a
+                style="display: none"
+                class="position-absolute bg-dark list-group-item"
               >
+                <li>
+                  <a class="nav-link" href="my-profile.html">Mi perfil</a>
+                </li>
+                <li>
+                  <a class="nav-link" href="login.html" onclick="logout()"
+                    >Cerrar sesión</a
+                  >
+                </li>
+              </ul>
             </li>
           </ul>
         </div>
