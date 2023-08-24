@@ -1,4 +1,3 @@
-const LIST_URL = 'https://japceibal.github.io/emercado-api/cats_products/101.json';
 let productsArray;
 
 function showProductList(array) {
@@ -28,27 +27,30 @@ function showProductList(array) {
 document.addEventListener("DOMContentLoaded", function (e) {
   const CatID = localStorage.getItem("CatID");
   if (CatID) {
-      const LIST_URL = `https://japceibal.github.io/emercado-api/cats_products/${CatID}.json`;
+    const LIST_URL = `https://japceibal.github.io/emercado-api/cats_products/${CatID}.json`;
 
-      getJSONData(LIST_URL)
-          .then(function (resultObj) {
-              if (resultObj.status === "ok") {
-                  if (Array.isArray(resultObj.data.products)) {
-                      productsArray = resultObj.data.products;
-                      showProductList(productsArray);
-                      console.log(resultObj.data.products)
-                      document.getElementById("nombre_articulo");
-                      nombre_articulo.innerHTML = resultObj.data.catName;
-                  } else {
-                      console.error("Data.products is not an array:", resultObj.data.products);
-                  }
-              } else {
-                  console.error("Error retrieving data:", resultObj.error);
-              }
-          })
-          .catch(function (error) {
-              console.error("Error retrieving data:", error);
-          });
+    getJSONData(LIST_URL)
+      .then(function (resultObj) {
+        if (resultObj.status === "ok") {
+          if (Array.isArray(resultObj.data.products)) {
+            productsArray = resultObj.data.products;
+            showProductList(productsArray);
+            console.log(resultObj.data.products);
+            document.getElementById("nombre_articulo");
+            nombre_articulo.innerHTML = resultObj.data.catName;
+          } else {
+            console.error(
+              "Data.products is not an array:",
+              resultObj.data.products
+            );
+          }
+        } else {
+          console.error("Error retrieving data:", resultObj.error);
+        }
+      })
+      .catch(function (error) {
+        console.error("Error retrieving data:", error);
+      });
   }
   function ordenarPorPrecioAscendente() {
     productsArray.sort((a, b) => a.cost - b.cost);
@@ -73,4 +75,18 @@ document.addEventListener("DOMContentLoaded", function (e) {
   sortByPriceAscBtn.addEventListener("click", ordenarPorPrecioAscendente);
   sortByPriceDescBtn.addEventListener("click", ordenarPorPrecioDescendente);
 
+  const productSearch = document.getElementById("productSearch");
+
+  productSearch.addEventListener("input", (e) => {
+    let value = e.target.value;
+    const filteredProducts = productsArray.filter((product) => {
+      return product.name.toLowerCase().includes(value);
+    });
+    if (value && value.trim().length > 0) {
+      value = value.trim().toLowerCase();
+      showProductList(filteredProducts);
+    } else {
+      showProductList(productsArray);
+    }
+  });
 });
