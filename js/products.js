@@ -123,30 +123,3 @@ document.addEventListener("DOMContentLoaded", function () {
       showProductList(productsArray);
     });
 });
-
-const orderBy = document.getElementById("orderBy");
-orderBy.addEventListener("change", () => {
-  if (orderBy.value === "sortByPriceAsc") {
-    ordenarPorPrecioAscendente();
-  } else if (orderBy.value === "sortByPriceDesc") {
-    ordenarPorPrecioDescendente();
-  } else if (orderBy.value === "sortByCountAsc") {
-    ordenarPorMasVendidos();
-  } else if (orderBy.value === "sortByCountDesc") {
-    ordenarPorMenosVendidos();
-  }
-});
-const productSearch = document.getElementById("productSearch");
-
-productSearch.addEventListener("input", (e) => {
-  let value = e.target.value;
-  const filteredProducts = productsArray.filter((product) => {
-    return product.name.toLowerCase().includes(value);
-  });
-  if (value && value.trim().length > 0) {
-    value = value.trim().toLowerCase();
-    showProductList(filteredProducts);
-  } else {
-    showProductList(productsArray);
-  }
-});
