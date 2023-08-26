@@ -1,4 +1,3 @@
-const LIST_URL = 'https://japceibal.github.io/emercado-api/cats_products/101.json';
 let productsArray;
 
 function showProductList(array) {
@@ -99,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
       showProductList(productsArray);
     }
   });
-  
+
   const filterBtn = document.getElementById("rangeFilterPrice");
   filterBtn.addEventListener("click", () => {
     const minPrice = document.getElementById("priceMin").value || 0;
@@ -111,21 +110,43 @@ document.addEventListener("DOMContentLoaded", function () {
     showProductList(filterProducts);
   });
 
-  document.getElementById("clearRangeFilter").addEventListener("click", function(){
-    document.getElementById("productSearch").value = "";
-    document.getElementById("priceMin").value = "";
-    document.getElementById("priceMax").value = "";
+  document
+    .getElementById("clearRangeFilter")
+    .addEventListener("click", function () {
+      document.getElementById("productSearch").value = "";
+      document.getElementById("priceMin").value = "";
+      document.getElementById("priceMax").value = "";
 
-    minCount = undefined;
-    maxCount = undefined;
+      minCount = undefined;
+      maxCount = undefined;
 
-    showProductList(productsArray);
+      showProductList(productsArray);
+    });
 });
 
-})
+const orderBy = document.getElementById("orderBy");
+orderBy.addEventListener("change", () => {
+  if (orderBy.value === "sortByPriceAsc") {
+    ordenarPorPrecioAscendente();
+  } else if (orderBy.value === "sortByPriceDesc") {
+    ordenarPorPrecioDescendente();
+  } else if (orderBy.value === "sortByCountAsc") {
+    ordenarPorMasVendidos();
+  } else if (orderBy.value === "sortByCountDesc") {
+    ordenarPorMenosVendidos();
+  }
+});
+const productSearch = document.getElementById("productSearch");
 
-  sortByCountBtn.addEventListener("click", ordenarPorCantidadVendida);
-  sortByPriceAscBtn.addEventListener("click", ordenarPorPrecioAscendente);
-  sortByPriceDescBtn.addEventListener("click", ordenarPorPrecioDescendente);
-
+productSearch.addEventListener("input", (e) => {
+  let value = e.target.value;
+  const filteredProducts = productsArray.filter((product) => {
+    return product.name.toLowerCase().includes(value);
+  });
+  if (value && value.trim().length > 0) {
+    value = value.trim().toLowerCase();
+    showProductList(filteredProducts);
+  } else {
+    showProductList(productsArray);
+  }
 });

@@ -2,7 +2,6 @@
 const username = localStorage.getItem("username");
 // Obtener el elemento donde se mostrará el nombre de usuario
 const usernameDisplay = document.getElementById("username-display");
-
 // Obtener el botón de cerrar sesión
 const logoutButton = document.getElementById("logout-button");
 
