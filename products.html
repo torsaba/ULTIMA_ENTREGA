@@ -56,6 +56,37 @@
       </div>
       <div class="container">
         <div class="row">
+          <div class="col text-start row" style="margin-top: 0.2em">
+            <div class="col">
+              <p class="font-weight-normal text-end my-2">Precio:</p>
+            </div>
+            <div class="col">
+              <input
+                type="number"
+                class="form-control"
+                placeholder="min."
+                id="priceMin"
+              />
+            </div>
+            <div class="col">
+              <input
+                type="number"
+                class="form-control"
+                placeholder="máx."
+                id="priceMax"
+              />
+            </div>
+            <div class="col-3 p-0">
+              <div class="btn-group" role="group">
+                <button class="btn btn-light btn-block" id="rangeFilterPrice">
+                  Filtrar
+                </button>
+                <button class="btn btn-light text-danger" id="clearRangeFilter">
+                  Limpiar
+                </button>
+              </div>
+            </div>
+          </div>
           <div class="col text-end">
             <div
               class="btn-group btn-group-toggle mb-4"
@@ -114,6 +145,27 @@
             </div>
           </div>
         </div>
+        <!-- <div class="row">
+          <div class="col-lg-6 offset-lg-6 col-md-12 mb-1 container">
+            <div class="row container p-0 m-0">
+              <div class="col">
+                <p class="font-weight-normal text-end my-2">Precio:</p>
+              </div>
+              <div class="col">
+                <input type="number" class="form-control" placeholder="min." id="priceMin">
+              </div>
+              <div class="col">
+                <input type="number" class="form-control" placeholder="máx." id="priceMax">
+              </div>
+              <div class="col-3 p-0">
+                <div class="btn-group" role="group">
+                  <button class="btn btn-light btn-block" id="rangeFilterPrice">Filtrar</button>
+                  <button class="btn btn-link btn-sm" id="clearRangeFilter">Limpiar</button>
+                </div>
+              </div>
+            </div>
+          </div> -->
+        <!--*CONTENEDOR DE LOS ARTICULOS QUE VIENEN DESDE LA API-->
         <div class="row">
           <div class="list-group" id="pro-list-container"></div>
         </div>

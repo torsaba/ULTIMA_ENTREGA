@@ -98,4 +98,28 @@ document.addEventListener("DOMContentLoaded", function () {
       showProductList(productsArray);
     }
   });
+
+  const filterBtn = document.getElementById("rangeFilterPrice");
+  filterBtn.addEventListener("click", () => {
+    const minPrice = document.getElementById("priceMin").value || 0;
+    const maxPrice = document.getElementById("priceMax").value || Infinity;
+    const filterProducts = productsArray.filter((product) => {
+      return product.cost >= minPrice && product.cost <= maxPrice;
+    });
+
+    showProductList(filterProducts);
+  });
+
+  document
+    .getElementById("clearRangeFilter")
+    .addEventListener("click", function () {
+      document.getElementById("productSearch").value = "";
+      document.getElementById("priceMin").value = "";
+      document.getElementById("priceMax").value = "";
+
+      minCount = undefined;
+      maxCount = undefined;
+
+      showProductList(productsArray);
+    });
 });
