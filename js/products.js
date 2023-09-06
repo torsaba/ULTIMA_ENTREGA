@@ -24,6 +24,27 @@ function showProductList(array) {
   document.getElementById("pro-list-container").innerHTML = htmlContentToAppend;
 }
 
+
+// Agrega un evento click a cada producto en la lista
+function attachProductClickEvent() {
+  const productItems = document.querySelectorAll(".list-group-item");
+  productItems.forEach((product, index) => {
+    product.addEventListener("click", () => {
+      // Obtiene el identificador del producto seleccionado
+      const selectedProductId = productsArray[index].id;
+
+      // Guarda el identificador en el almacenamiento local
+      localStorage.setItem("selectedProductId", selectedProductId);
+
+      // Se redirige al usuario a product-info.html
+      window.location.href = "product-info.html";
+    });
+  });
+}
+
+
+
+
 document.addEventListener("DOMContentLoaded", function () {
   const CatID = localStorage.getItem("CatID");
   if (CatID) {
@@ -38,6 +59,11 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log(resultObj.data.products);
             document.getElementById("nombre_articulo");
             nombre_articulo.innerHTML = resultObj.data.catName;
+
+
+       // Se llama a la función para adjuntar el evento de clic a los productos
+       attachProductClickEvent();
+
           } else {
             console.error(
               "Data.products is not an array:",
