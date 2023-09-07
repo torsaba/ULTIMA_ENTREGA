@@ -69,10 +69,66 @@
       </div>
     </nav>
     <main>
-      <div class="container">
-        <div class="alert alert-danger text-center" role="alert">
-          <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+      <div class="container my-5">
+        <div class="row">
+          <div class="col-md-5">
+            <div
+              id="productCarousel"
+              class="carousel slide"
+              data-bs-ride="carousel"
+              data-bs-wrap="true"
+            >
+              <!-- Carousel -->
+              <div class="carousel-indicators" id="cIndicators"></div>
+
+              <!-- Carousel images -->
+              <div class="carousel-inner" id="imgContainer"></div>
+
+              <!-- Carousel controls -->
+              <button
+                class="carousel-control-prev"
+                type="button"
+                data-bs-target="#productCarousel"
+                data-bs-slide="prev"
+              >
+                <span class="carousel-control-prev-icon"></span>
+              </button>
+              <button
+                class="carousel-control-next"
+                type="button"
+                data-bs-target="#productCarousel"
+                data-bs-slide="next"
+              >
+                <span class="carousel-control-next-icon"></span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Product info -->
+          <div class="col-md-7">
+            <h1 id="prodTitle">Product Title</h1>
+            <p class="lead text-muted">OFERTA!</p>
+
+            <p class="text-danger fs-4 fw-bold">
+              <span id="prodPrice"></span>
+              <small class="text-muted"><s id="oldPrice"></s></small>
+            </p>
+            <p id="prodDescription">
+              Product description goes here. Lorem ipsum dolor sit amet
+              consectetur adipisicing elit. Voluptatibus, modi!
+            </p>
+
+            <p id="prodSoldCount" class="text-muted">Vendidos:</p>
+
+            <a href="#" class="btn btn-primary">Agregar al carrito</a>
+          </div>
         </div>
+      </div>
+
+      <div class="container my-5">
+        <h2 class="mb-4">Productos relacionados</h2>
+
+        <div class="row" id="relProdContainer"></div>
       </div>
     </main>
     <footer class="text-muted">

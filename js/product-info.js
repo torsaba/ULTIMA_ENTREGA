@@ -17,12 +17,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     title.textContent = data.name;
     description.textContent = data.description;
-    price.textContent = data.currency + " " + data.cost.toLocaleString("es-ES");
+    price.textContent =
+      data.currency + " " + Intl.NumberFormat("es-ES").format(data.cost);
     soldCount.textContent += " " + data.soldCount;
     oldPrice.textContent =
       data.currency +
       " " +
-      (data.cost + data.cost * 0.5).toLocaleString("es-ES");
+      Intl.NumberFormat("es-ES").format(data.cost + data.cost * 0.5);
     data.images.forEach((image, index) => {
       productImages.innerHTML += `<div class="carousel-item">
               <img src="${image}" class="d-block img-thumbnail rounded mx-auto w-100" alt="..." />
