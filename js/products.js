@@ -12,7 +12,13 @@ function showProductList(array) {
           <div class="col">
             <div class="d-flex w-100 justify-content-between">
               <div class="mb-1">
+<<<<<<< Updated upstream
                 <h4>${product.name} - ${product.currency} ${product.cost}</h4>
+=======
+                <h4>${product.name} - ${
+      product.currency
+    } ${product.cost.toLocaleString("es-ES")}</h4>
+>>>>>>> Stashed changes
                 <p>${product.description}</p>
               </div>
               <small class="text-muted">${product.soldCount} vendidos</small>
@@ -24,6 +30,26 @@ function showProductList(array) {
   document.getElementById("pro-list-container").innerHTML = htmlContentToAppend;
 }
 
+<<<<<<< Updated upstream
+=======
+// Agrega un evento click a cada producto en la lista
+function attachProductClickEvent() {
+  const productItems = document.querySelectorAll(".list-group-item");
+  productItems.forEach((product, index) => {
+    product.addEventListener("click", () => {
+      // Obtiene el identificador del producto seleccionado
+      const selectedProductId = productsArray[index].id;
+
+      // Guarda el identificador en el almacenamiento local
+      localStorage.setItem("selectedProductId", selectedProductId);
+
+      // Se redirige al usuario a product-info.html
+      window.location.href = "product-info.html";
+    });
+  });
+}
+
+>>>>>>> Stashed changes
 document.addEventListener("DOMContentLoaded", function () {
   const CatID = localStorage.getItem("CatID");
   if (CatID) {
