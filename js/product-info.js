@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 function reloadProductInfo(id) {
   localStorage.setItem("selectedProductId", id);
   location.reload();
@@ -62,4 +60,3 @@ document.addEventListener("DOMContentLoaded", function () {
     ? fetchProductInfo(productID)
     : alert("No hay producto seleccionado.");
 });
->>>>>>> Stashed changes

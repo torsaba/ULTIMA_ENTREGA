@@ -7,18 +7,16 @@ function showProductList(array) {
       <div class="list-group-item list-group-item-action">
         <div class="row">
           <div class="col-3">
-            <img src="${product.image}" alt="product image" class="img-thumbnail">
+            <img src="${
+              product.image
+            }" alt="product image" class="img-thumbnail">
           </div>
           <div class="col">
             <div class="d-flex w-100 justify-content-between">
               <div class="mb-1">
-<<<<<<< Updated upstream
-                <h4>${product.name} - ${product.currency} ${product.cost}</h4>
-=======
                 <h4>${product.name} - ${
       product.currency
     } ${product.cost.toLocaleString("es-ES")}</h4>
->>>>>>> Stashed changes
                 <p>${product.description}</p>
               </div>
               <small class="text-muted">${product.soldCount} vendidos</small>
@@ -30,8 +28,6 @@ function showProductList(array) {
   document.getElementById("pro-list-container").innerHTML = htmlContentToAppend;
 }
 
-<<<<<<< Updated upstream
-=======
 // Agrega un evento click a cada producto en la lista
 function attachProductClickEvent() {
   const productItems = document.querySelectorAll(".list-group-item");
@@ -49,7 +45,6 @@ function attachProductClickEvent() {
   });
 }
 
->>>>>>> Stashed changes
 document.addEventListener("DOMContentLoaded", function () {
   const CatID = localStorage.getItem("CatID");
   if (CatID) {
