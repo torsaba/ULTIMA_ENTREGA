@@ -34,7 +34,7 @@ function attachProductClickEvent() {
   productItems.forEach((product, index) => {
     product.addEventListener("click", () => {
       // Obtiene el identificador del producto seleccionado
-      const selectedProductId = productsArray[index - 1].id;
+      const selectedProductId = productsArray[index].id;
 
       // Guarda el identificador en el almacenamiento local
       localStorage.setItem("selectedProductId", selectedProductId);
