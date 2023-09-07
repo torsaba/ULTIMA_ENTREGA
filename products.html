@@ -77,7 +77,7 @@
         </p>
       </div>
       <div class="container">
-        <div class="row">
+        <div class="row" style="margin-bottom: 1em">
           <div class="col text-start row" style="margin-top: 0.2em">
             <div class="col">
               <p class="font-weight-normal text-end my-2">Precio:</p>
@@ -98,7 +98,7 @@
                 id="priceMax"
               />
             </div>
-            <div class="col-3 p-0">
+            <div class="col p-0">
               <div class="btn-group" role="group">
                 <button class="btn btn-light btn-block" id="rangeFilterPrice">
                   Filtrar
@@ -109,62 +109,48 @@
               </div>
             </div>
           </div>
-          <div class="col text-end">
-            <div
-              class="btn-group btn-group-toggle mb-4"
-              data-bs-toggle="buttons"
-            >
-              <label
-                for="productSearch"
-                class="input-group-text"
-                style="margin-right: 1em"
+          <div
+            class="col row text-end justify-content-between align-content-center"
+            style="margin-left: 1em"
+          >
+            <input
+              type="search"
+              class="form-control col"
+              name="txbSearch"
+              id="productSearch"
+              style="margin-right: 0.2em"
+              placeholder="Buscar productos..."
+            />
+            <label for="orderBy" class="col">
+              <select
+                name="Ordenar"
+                id="orderBy"
+                class="form-select"
+                style="margin-top: 2%"
               >
-                <input
-                  type="search"
-                  name="txbSearch"
-                  id="productSearch"
-                  placeholder="Buscar productos..."
-                />
-              </label>
-              <label for="orderBy">
-                <select
-                  name="Ordenar"
-                  id="orderBy"
-                  class="form-select"
-                  style="margin-top: 2%"
+                <option disabled selected>Ordenar por:</option>
+                <option name="options" value="sortByCountAsc" id="sortByCount">
+                  Más vendidos
+                </option>
+                <option name="options" value="sortByCountDesc" id="sortByCount">
+                  Menos vendidos
+                </option>
+                <option
+                  value="sortByPriceDesc"
+                  name="options"
+                  id="sortByPriceDesc"
                 >
-                  <option disabled selected>Ordenar por:</option>
-                  <option
-                    name="options"
-                    value="sortByCountAsc"
-                    id="sortByCount"
-                  >
-                    Más vendidos
-                  </option>
-                  <option
-                    name="options"
-                    value="sortByCountDesc"
-                    id="sortByCount"
-                  >
-                    Menos vendidos
-                  </option>
-                  <option
-                    value="sortByPriceDesc"
-                    name="options"
-                    id="sortByPriceDesc"
-                  >
-                    Mayor precio
-                  </option>
-                  <option
-                    name="options"
-                    value="sortByPriceAsc"
-                    id="sortByPriceAsc"
-                  >
-                    Menor precio
-                  </option>
-                </select>
-              </label>
-            </div>
+                  Mayor precio
+                </option>
+                <option
+                  name="options"
+                  value="sortByPriceAsc"
+                  id="sortByPriceAsc"
+                >
+                  Menor precio
+                </option>
+              </select>
+            </label>
           </div>
         </div>
         <!--*CONTENEDOR DE LOS ARTICULOS QUE VIENEN DESDE LA API-->
