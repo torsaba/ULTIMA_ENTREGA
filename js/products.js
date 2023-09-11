@@ -1,6 +1,7 @@
 let productsArray;
 
 function showProductList(array) {
+  let productContainer = document.getElementById("pro-list-container");
   let htmlContentToAppend = "";
   array.forEach((product) => {
     htmlContentToAppend += `
@@ -25,7 +26,9 @@ function showProductList(array) {
         </div>
       </div>`;
   });
-  document.getElementById("pro-list-container").innerHTML = htmlContentToAppend;
+  array.length === 0
+    ? (productContainer.innerHTML = `<div class="text-center">No hay productos.</div>`)
+    : (productContainer.innerHTML = htmlContentToAppend);
 }
 
 // Agrega un evento click a cada producto en la lista
