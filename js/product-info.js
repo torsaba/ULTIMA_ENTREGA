@@ -1,5 +1,6 @@
 var comments = [];
 var myComments = [];
+var selectedStars = 0;
 
 function calcularDiferenciaDeTiempo(fechaString) {
   var ahora = new Date();
@@ -75,7 +76,7 @@ function chargeProductInfo(data) {
               <img src="${product.image}" class="card-img-top" />
               <div class="card-body">
                 <h5 class="card-title">${product.name}</h5>
-                <button class="btn btn-outline-dark flex-shrink-0" onclick="reloadProductInfo(${product.id})">Comprar</button>
+                <button class="btn btn-outline-dark flex-shrink-0" onclick="reloadProductInfo(${product.id})"> <i class="fa fa-shopping-cart"> </i> Comprar</button>
               </div>
             </div>
           </div>`;
@@ -141,7 +142,6 @@ function reloadProductInfo(id) {
 }
 
 function starPainting(stars) {
-  let rango = -1;
   stars.forEach((star, index) => {
     star.addEventListener("mouseenter", () => {
       for (let i = 0; i <= index; i++) {
@@ -149,29 +149,28 @@ function starPainting(stars) {
       }
     });
     star.addEventListener("click", () => {
-      rango = index;
-      document.getElementById("score").value = rango;
+      selectedStars = index + 1;
+      document.getElementById("score").value = selectedStars;
       stars.forEach((star) => {
         star.classList.remove("checked");
       });
-      calificacion(rango, stars);
+      showStarSelection(stars);
     });
     star.addEventListener("mouseleave", () => {
       stars.forEach((star) => {
         star.classList.remove("checked");
       });
-      calificacion(rango, stars);
+      showStarSelection(stars);
     });
   });
 }
 
-function calificacion(rango, stars) {
+// Muestra la selección de estrellas, recibe un array de estrellas como parámetro
+function showStarSelection(stars) {
   stars.forEach((star, index) => {
-    if (index <= rango) {
-      star.classList.add("checked");
-    } else {
-      star.classList.remove("checked");
-    }
+    index < selectedStars
+      ? star.classList.add("checked")
+      : star.classList.remove("checked");
   });
 }
 
@@ -217,6 +216,9 @@ function addComments(textArea, score, stars, myProductComments, productID) {
   // Limpiar el área de los comentarios
   textArea.value = "";
   score.value = "";
+
+  selectedStars = 0;
+  showStarSelection(stars);
 
   // Muestra todos los comentarios, incluido el nuevo
   displayProductComments(comments.concat(myProductComments));
