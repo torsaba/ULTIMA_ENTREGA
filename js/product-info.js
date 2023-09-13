@@ -137,8 +137,10 @@ function displayProductComments(comments) {
   }
 }
 function reloadProductInfo(id) {
+  window.location.href = "product-info.html";
   localStorage.setItem("selectedProductId", id);
-  location.reload();
+  window.location.href = "product-info.html#";
+  window.location.reload();
 }
 
 function starPainting(stars) {
