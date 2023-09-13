@@ -122,18 +122,56 @@
 
             <p id="prodSoldCount" class="text-muted">Vendidos:</p>
 
-            <a href="#" class="btn btn-primary">Agregar al carrito</a>
+            <a href="#" class="btn btn-outline-dark flex-shrink-0"
+              >Agregar al carrito</a
+            >
           </div>
         </div>
       </div>
       <!--* Comment container -->
-      <div class="container my-5" id="comments-container">
-        <h2>Comentarios</h2>
+      <div class="container my-5" id="comments-container"></div>
+      <div class="container my-5" id="comment-container">
+        <form id="comentarioForm">
+          <div class="mb-3">
+            <label for="comment" class="form-label"
+              ><h3>Agregar comentario</h3></label
+            ><br />
+            <textarea
+              class="form-control"
+              name="comment"
+              id="comment"
+              cols="50"
+              rows="5"
+            >
+            </textarea>
+          </div>
+          <div class="mb-3">
+            <label for="score" class="form-label"
+              >Califica este producto:</label
+            >
+            <div>
+              <div class="score cursor-active mb-3" style="font-size: x-large">
+                <span class="star fa fa-star"></span>
+                <span class="star fa fa-star"></span>
+                <span class="star fa fa-star"></span>
+                <span class="star fa fa-star"></span>
+                <span class="star fa fa-star"></span>
+              </div>
+              <input type="hidden" id="score" name="opinion" min="1" max="5" />
+            </div>
+            <button
+              id="send-comment"
+              type="submit"
+              class="btn btn-outline-dark flex-shrink-0"
+            >
+              Enviar
+            </button>
+          </div>
+        </form>
       </div>
       <!--* Related products container -->
       <div class="container my-5">
         <h2 class="mb-4">Productos relacionados</h2>
-
         <div class="row" id="relProdContainer"></div>
       </div>
     </main>
