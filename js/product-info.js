@@ -1,4 +1,5 @@
 var comments = [];
+var myComments = [];
 
 function calcularDiferenciaDeTiempo(fechaString) {
   var ahora = new Date();
@@ -74,20 +75,20 @@ function chargeProductInfo(data) {
               <img src="${product.image}" class="card-img-top" />
               <div class="card-body">
                 <h5 class="card-title">${product.name}</h5>
-                <button class="btn btn-primary" onclick="reloadProductInfo(${product.id})">Comprar</button>
+                <button class="btn btn-outline-dark flex-shrink-0" onclick="reloadProductInfo(${product.id})">Comprar</button>
               </div>
             </div>
           </div>`;
   });
 }
 
-function fetchProductComment(id) {
+function fetchProductComment(id, myComments) {
   getJSONData(
     `https://japceibal.github.io/emercado-api/products_comments/${id}.json`
   )
     .then((result) => {
       comments = result.data;
-      displayProductComments(comments);
+      displayProductComments(comments.concat(myComments));
     })
     .catch((error) => {
       alert(error);
@@ -96,29 +97,35 @@ function fetchProductComment(id) {
 
 function displayProductComments(comments) {
   let commentsContainer = document.getElementById("comments-container");
+  commentsContainer.innerHTML = "<h2>Comentarios</h2>";
   if (comments.length > 0) {
     comments.forEach((comment) => {
       commentsContainer.innerHTML += `<hr>
       <div class="d-flex mb-3">
           <div id="star-container">
-            <span class="fa fa-star ${comment.score >= 1 ? `checked` : ``
-        }"></span>
-            <span class="fa fa-star ${comment.score >= 2 ? `checked` : ``
-        }"></span>
-            <span class="fa fa-star ${comment.score >= 3 ? `checked` : ``
-        }"></span>
-            <span class="fa fa-star ${comment.score >= 4 ? `checked` : ``
-        }"></span>
-            <span class="fa fa-star ${comment.score >= 5 ? `checked` : ``
-        }"></span>
+            <span class="fa fa-star ${
+              comment.score >= 1 ? `checked` : ``
+            }"></span>
+            <span class="fa fa-star ${
+              comment.score >= 2 ? `checked` : ``
+            }"></span>
+            <span class="fa fa-star ${
+              comment.score >= 3 ? `checked` : ``
+            }"></span>
+            <span class="fa fa-star ${
+              comment.score >= 4 ? `checked` : ``
+            }"></span>
+            <span class="fa fa-star ${
+              comment.score >= 5 ? `checked` : ``
+            }"></span>
           </div>
           <div class="ms-3" id="comment-content">
             <p>${comment.description}</p>
             <div class="text-muted">
               <span id="comment-user">Por: ${comment.user}</span>
               <span id="comment-date">${calcularDiferenciaDeTiempo(
-          comment.dateTime
-        )}</span>
+                comment.dateTime
+              )}</span>
             </div>
           </div>
         </div>`;
@@ -133,79 +140,121 @@ function reloadProductInfo(id) {
   location.reload();
 }
 
+function starPainting(stars) {
+  let rango = -1;
+  stars.forEach((star, index) => {
+    star.addEventListener("mouseenter", () => {
+      for (let i = 0; i <= index; i++) {
+        stars[i].classList.add("checked");
+      }
+    });
+    star.addEventListener("click", () => {
+      rango = index;
+      document.getElementById("score").value = rango;
+      stars.forEach((star) => {
+        star.classList.remove("checked");
+      });
+      calificacion(rango, stars);
+    });
+    star.addEventListener("mouseleave", () => {
+      stars.forEach((star) => {
+        star.classList.remove("checked");
+      });
+      calificacion(rango, stars);
+    });
+  });
+}
+
+function calificacion(rango, stars) {
+  stars.forEach((star, index) => {
+    if (index <= rango) {
+      star.classList.add("checked");
+    } else {
+      star.classList.remove("checked");
+    }
+  });
+}
+
+function getSelectedRating(stars) {
+  let calificacion = 0;
+  stars.forEach((star, index) => {
+    if (star.classList.contains("checked")) {
+      calificacion = index + 1;
+    }
+  });
+  return calificacion;
+}
+
+function addComments(textArea, score, stars, myProductComments, productID) {
+  // Obtiene el contenido del comentario y la puntuación
+  const newCommentText = textArea.value;
+  const newCommentScore = getSelectedRating(stars);
+
+  // Evalua si se ingresó comentario valido
+  if (
+    newCommentText.trim() === "" ||
+    isNaN(newCommentScore) ||
+    newCommentScore < 1 ||
+    newCommentScore > 5
+  ) {
+    alert("ERROR!, ingresa un comentario válido y una puntuación entre 1 y 5.");
+    return;
+  }
+
+  // Crear un nuevo objeto (comentario)
+  let newComment = {
+    id: productID,
+    description: newCommentText,
+    score: newCommentScore,
+    user: localStorage.getItem("username"),
+    dateTime: new Date().toString(),
+  };
+
+  // Agregar el nuevo comentario
+  myComments.push(newComment);
+  myProductComments.push(newComment);
+
+  // Limpiar el área de los comentarios
+  textArea.value = "";
+  score.value = "";
+
+  // Muestra todos los comentarios, incluido el nuevo
+  displayProductComments(comments.concat(myProductComments));
+
+  localStorage.setItem("myCommments", JSON.stringify(myComments));
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   const productID = localStorage.getItem("selectedProductId");
-
+  myComments = JSON.parse(localStorage.getItem("myCommments")) || [];
+  var myProductComments = myComments.filter(
+    (comment) => comment.id === productID
+  );
   if (productID) {
     fetchProductInfo(productID);
-    fetchProductComment(productID);
+    fetchProductComment(productID, myProductComments);
   } else {
     alert("No hay producto seleccionado.");
   }
+
+  const stars = document.querySelectorAll(".star");
+  starPainting(stars);
+
   const commentTextarea = document.getElementById("comment");
   const scoreInput = document.getElementById("score");
   const sendCommentButton = document.getElementById("send-comment");
 
+  commentTextarea.value = "";
+
   // Agregar evento de clic al botón de enviar comentario
-  sendCommentButton.addEventListener("click", function () {
-
-    // Obtiene el contenido del comentario y la puntuación
-    const newCommentText = commentTextarea.value.trim();
-    const newCommentScore = parseInt(scoreInput.value);
-
-    // Evalua si se ingresó comentario valido 
-    if (newCommentText === "" || isNaN(newCommentScore) || newCommentScore < 1 || newCommentScore > 5) {
-      alert("ERROR!, ingresa un comentario válido y una puntuación entre 1 y 5.");
-      return;
-    }
-
-    // Crear un nuevo objeto (comentario)
-    const newComment = {
-      description: newCommentText,
-      score: newCommentScore,
-      user: "Usuario",
-      dateTime: new Date().toString(),
-    };
-
-    // Agregar el nuevo comentario
-    comments.push(newComment);
-
-    // Limpiar el área de los comentarios
-    commentTextarea.value = "";
-    scoreInput.value = "";
-
-    // Muestra todos los comentarios, incluido el nuevo
-    displayProductComments(comments);
+  sendCommentButton.addEventListener("click", function (e) {
+    e.preventDefault();
+    addComments(
+      commentTextarea,
+      scoreInput,
+      stars,
+      myProductComments,
+      productID
+    );
   });
-
-  const stars = document.querySelectorAll('.star');
-
-  stars.forEach((star, index) => {
-    star.addEventListener('click', function () {
-      const rango = index + 1; // El índice de la estrella más 1 es el rango
-      document.getElementById('opinion').value = rango;
-      calificacion(rango);
-    });
-  });
-
-  function calificacion(rango) {
-    stars.forEach((star, index) => {
-      if (index < rango) {
-        star.innerHTML = '&#9733;';
-      } else {
-        star.innerHTML = '&#9734;';
-      }
-    });
-  }
-
-  function getSelectedRating() {
-    const stars = document.querySelectorAll('.star');
-    let calificacion = 0;
-    stars.forEach((star, index) => {
-      if (star.innerHTML === '&#9733;') {
-        calificacion = index + 1;
-      }
-    });
-    return calificacion;
-  }
 });
