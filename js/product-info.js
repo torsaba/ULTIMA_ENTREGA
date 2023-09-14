@@ -1,6 +1,7 @@
 var comments = [];
 var myComments = [];
 var selectedStars = 0;
+var navBar;
 
 function calcularDiferenciaDeTiempo(fechaString) {
   var ahora = new Date();
@@ -137,10 +138,9 @@ function displayProductComments(comments) {
   }
 }
 function reloadProductInfo(id) {
-  window.location.href = "product-info.html";
   localStorage.setItem("selectedProductId", id);
-  window.location.href = "product-info.html#";
   window.location.reload();
+  navBar.scrollIntoView();
 }
 
 function starPainting(stars) {
@@ -230,6 +230,7 @@ function addComments(textArea, score, stars, myProductComments, productID) {
 
 document.addEventListener("DOMContentLoaded", function () {
   const productID = localStorage.getItem("selectedProductId");
+
   myComments = JSON.parse(localStorage.getItem("myCommments")) || [];
   var myProductComments = myComments.filter(
     (comment) => comment.id === productID
@@ -261,4 +262,6 @@ document.addEventListener("DOMContentLoaded", function () {
       productID
     );
   });
+
+  navBar = document.getElementsByTagName("nav")[0];
 });
