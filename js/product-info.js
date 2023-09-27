@@ -73,11 +73,11 @@ function chargeProductInfo(data) {
 
   data.relatedProducts.forEach((product) => {
     relatedProducts.innerHTML += `<div class="col-md-3">
-            <div class="card">
+            <div class="card" onclick="reloadProductInfo(${product.id})" style="cursor:pointer;">
               <img src="${product.image}" class="card-img-top" />
               <div class="card-body">
                 <h5 class="card-title">${product.name}</h5>
-                <button class="btn btn-outline-dark flex-shrink-0" onclick="reloadProductInfo(${product.id})"> <i class="fa fa-shopping-cart"> </i> Comprar</button>
+                <button class="btn btn-outline-dark flex-shrink-0" onclick="reloadProductInfo(${product.id})"> <i class="fa fa-sign-out-alt"> </i> Ver más</button>
               </div>
             </div>
           </div>`;
