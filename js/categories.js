@@ -40,36 +40,47 @@ function setCatID(id) {
     window.location = "products.html"
 }
 
-function showCategoriesList(){
-
+function showCategoriesList() {
     let htmlContentToAppend = "";
-    for(let i = 0; i < currentCategoriesArray.length; i++){
-        let category = currentCategoriesArray[i];
-
-        if (((minCount == undefined) || (minCount != undefined && parseInt(category.productCount) >= minCount)) &&
-            ((maxCount == undefined) || (maxCount != undefined && parseInt(category.productCount) <= maxCount))){
-
-            htmlContentToAppend += `
-            <div onclick="setCatID(${category.id})" class="list-group-item list-group-item-action cursor-active">
-                <div class="row">
-                    <div class="col-3">
-                        <img src="${category.imgSrc}" alt="${category.description}" class="img-thumbnail">
-                    </div>
-                    <div class="col">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h4 class="mb-1">${category.name}</h4>
-                            <small class="text-muted">${category.productCount} artículos</small>
-                        </div>
-                        <p class="mb-1">${category.description}</p>
-                    </div>
+    const body = document.body;
+  
+    for (let i = 0; i < currentCategoriesArray.length; i++) {
+      let category = currentCategoriesArray[i];
+  
+      if (
+        ((minCount == undefined) ||
+          (minCount != undefined &&
+            parseInt(category.productCount) >= minCount)) &&
+        ((maxCount == undefined) ||
+          (maxCount != undefined &&
+            parseInt(category.productCount) <= maxCount))
+      ) {
+        // Agrega clases CSS específicas para el modo claro u oscuro
+        const darkModeClass = body.classList.contains('dark-mode')
+          ? 'dark-mode' // Clase para el modo oscuro
+          : ''; // Cadena vacía para el modo claro
+  
+        htmlContentToAppend += `
+          <div onclick="setCatID(${category.id})" class="list-group-item list-group-item-action cursor-active ${darkModeClass}">
+            <div class="row">
+              <div class="col-3">
+                <img src="${category.imgSrc}" alt="${category.description}" class="img-thumbnail">
+              </div>
+              <div class="col">
+                <div class="d-flex w-100 justify-content-between">
+                  <h4 class="mb-1">${category.name}</h4>
+                  <small class="text-muted">${category.productCount} artículos</small>
                 </div>
+                <p class="mb-1">${category.description}</p>
+              </div>
             </div>
-            `
-        }
-
-        document.getElementById("cat-list-container").innerHTML = htmlContentToAppend;
+          </div>
+        `;
+      }
     }
-}
+  
+    document.getElementById("cat-list-container").innerHTML = htmlContentToAppend;
+  }
 
 function sortAndShowCategories(sortCriteria, categoriesArray){
     currentSortCriteria = sortCriteria;
@@ -140,4 +151,33 @@ document.addEventListener("DOMContentLoaded", function(e){
 
         showCategoriesList();
     });
+
+    function toggleDarkMode() {
+        const body = document.body;
+        const modeToggleBtn = document.getElementById('mode-toggle');
+        
+      
+        // Cambia el modo y guarda la elección en el Local Storage
+        body.classList.toggle('dark-mode'); // Agrega o elimina la clase 'dark-mode' al cuerpo
+        const isDarkMode = body.classList.contains('dark-mode');
+        localStorage.setItem('darkMode', isDarkMode);
+      
+        
+        // Cambia el texto del botón y el ícono según el modo actual
+        if (isDarkMode) {
+          modeToggleBtn.innerHTML = '<i class="fas fa-moon"></i> Modo Oscuro';
+        } else {
+          modeToggleBtn.innerHTML = '<i class="fas fa-sun"></i> Modo Claro';
+        }
+      }
+      
+      // Verifica si el usuario ha seleccionado el modo oscuro previamente
+      const savedDarkMode = localStorage.getItem('darkMode');
+      if (savedDarkMode === 'true') {
+        // Habilita el modo oscuro si se guardó previamente
+        toggleDarkMode();
+      }
+
+// Manejador de eventos para el botón de cambio de modo
+document.getElementById('mode-toggle').addEventListener('click', toggleDarkMode);
 });

@@ -9,19 +9,61 @@
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
 }
 
-/* body.dark-mode {
+body.dark-mode {
   background-color: #222;
-  color: #fff;
+  color: #cecece;
 }
 
 .dark-mode .list-group-item {
   background-color: #333;  
-  color: #fff;  
+  color: #fff;
+  border-color:rgb(83, 83, 83);
 }
 
-.navbar-dark .navbar-toggler-icon {
-  background-color: #fff;
-} */
+
+/* Modo claro para Agregar al carrito */
+.btn-add-to-cart-light {
+  background-color: #333;
+  color: #fff;
+}
+
+/* Modo claro para boton enviar */
+.btn-send-light {
+  background-color: #333;;
+  color: #fff;
+}
+
+/* Modo oscuro para Agregar al carrito */
+.btn-add-to-cart-dark {
+  background-color: #8f1212;
+  color: #fff;
+}
+
+.btn-add-to-cart-dark:hover {
+  background-color: rgb(94, 3, 3);
+}
+
+/* Modo oscuro para boton enviar */
+.btn-send-dark {
+  background-color: #505050;
+  color: #fff;
+}
+
+.btn-send-dark:hover {
+  background-color: rgb(194, 133, 0);
+}
+
+/* Modo claro para la carta de producto relacionado */
+.light-mode .related-product {
+  color: black;
+}
+
+/* Modo oscuro para la carta de producto relacionado */
+.dark-mode .related-product {
+  color: rgb(187, 187, 187);
+  background-color: #1d1d1d;
+  border-color:rgb(44, 44, 44);
+}
 
 .jumbotron .display-4 {
   font-weight: bold;
