@@ -133,4 +133,34 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("priceMax").value = "";
       showProductList(productsArray);
     });
+
+    
+    function toggleDarkMode() {
+      const body = document.body;
+      const modeToggleBtn = document.getElementById('mode-toggle');
+    
+      
+
+      // Cambia el modo y guarda la elección en el Local Storage
+      body.classList.toggle('dark-mode'); // Agrega o elimina la clase 'dark-mode' al cuerpo
+      const isDarkMode = body.classList.contains('dark-mode');
+      localStorage.setItem('darkMode', isDarkMode);
+    
+      // Cambia el texto del botón y el ícono según el modo actual
+      if (isDarkMode) {
+        modeToggleBtn.innerHTML = '<i class="fas fa-moon"></i> Modo Oscuro';
+      } else {
+        modeToggleBtn.innerHTML = '<i class="fas fa-sun"></i> Modo Claro';
+      }
+    }
+    
+    // Verifica si el usuario ha seleccionado el modo oscuro previamente
+    const savedDarkMode = localStorage.getItem('darkMode');
+    if (savedDarkMode === 'true') {
+      // Habilita el modo oscuro si se guardó previamente
+      toggleDarkMode();
+    }
+
+// Manejador de eventos para el botón de cambio de modo
+document.getElementById('mode-toggle').addEventListener('click', toggleDarkMode);
 });

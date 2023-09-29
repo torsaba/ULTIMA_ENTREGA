@@ -73,15 +73,15 @@ function chargeProductInfo(data) {
 
   data.relatedProducts.forEach((product) => {
     relatedProducts.innerHTML += `<div class="col-md-3">
-            <div class="card" onclick="reloadProductInfo(${product.id})" style="cursor:pointer;">
-              <img src="${product.image}" class="card-img-top" />
-              <div class="card-body">
-                <h5 class="card-title">${product.name}</h5>
-                <button class="btn btn-outline-dark flex-shrink-0" onclick="reloadProductInfo(${product.id})"> <i class="fa fa-sign-out-alt"> </i> Ver más</button>
-              </div>
-            </div>
-          </div>`;
-  });
+        <div class="card related-product" onclick="reloadProductInfo(${product.id})" style="cursor:pointer;">
+          <img src="${product.image}" class="card-img-top" />
+          <div class="card-body">
+            <h5 class="card-title">${product.name}</h5>
+            <button class="btn btn-outline-dark flex-shrink-0" style="color:rgb(100, 100, 100); border-color:rgb(100, 100, 100);" onclick="reloadProductInfo(${product.id})"> <i class="fa fa-sign-out-alt"> </i> Ver más</button>
+          </div>
+        </div>
+      </div>`;
+  });  
 }
 
 function fetchProductComment(id, myComments) {
@@ -264,4 +264,56 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   navBar = document.getElementsByTagName("nav")[0];
+
+  
+    
+  function toggleDarkMode() {
+    const body = document.body;
+    const modeToggleBtn = document.getElementById('mode-toggle');
+    const addToCartBtn = document.querySelector('.btn-add-to-cart');
+    const sendBtn = document.querySelector('.btn-send');
+    const relatedProductTitles = document.querySelectorAll('.related-product');
+
+    
+  
+    // Cambia el modo y guarda la elección en el Local Storage
+    body.classList.toggle('dark-mode'); // Agrega o elimina la clase 'dark-mode' al cuerpo
+    const isDarkMode = body.classList.contains('dark-mode');
+    localStorage.setItem('darkMode', isDarkMode);
+  
+    // Cambia el texto del botón y el ícono según el modo actual
+    if (isDarkMode) {
+      modeToggleBtn.innerHTML = '<i class="fas fa-moon"></i> Modo Oscuro';
+      addToCartBtn.classList.remove('btn-add-to-cart-light');
+      sendBtn.classList.remove('btn-send-light');
+      addToCartBtn.classList.add('btn-add-to-cart-dark');
+      sendBtn.classList.add('btn-send-dark');
+  } else {
+      modeToggleBtn.innerHTML = '<i class="fas fa-sun"></i> Modo Claro';
+      addToCartBtn.classList.remove('btn-add-to-cart-dark');
+      sendBtn.classList.remove('btn-send-dark');
+      addToCartBtn.classList.add('btn-add-to-cart-light');
+      sendBtn.classList.add('btn-send-light');
+  }
+
+  relatedProductTitles.forEach((title) => {
+    if (isDarkMode) {
+      title.classList.remove('light-mode');
+      title.classList.add('dark-mode');
+    } else {
+      title.classList.remove('dark-mode');
+      title.classList.add('light-mode');
+    }
+  });
+}
+  
+  // Verifica si el usuario ha seleccionado el modo oscuro previamente
+  const savedDarkMode = localStorage.getItem('darkMode');
+  if (savedDarkMode === 'true') {
+    // Habilita el modo oscuro si se guardó previamente
+    toggleDarkMode();
+  }
+
+// Manejador de eventos para el botón de cambio de modo
+document.getElementById('mode-toggle').addEventListener('click', toggleDarkMode);
 });

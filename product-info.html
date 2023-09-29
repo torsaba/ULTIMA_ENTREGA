@@ -74,12 +74,17 @@
                     <i class="fa fa-sign-out-alt"></i> Cerrar sesión</a
                   >
                 </li>
+                <li>
+                  <button id="mode-toggle" class="btn nav-link">
+                    <i class="fas fa-sun"></i> Modo Claro
+                  </button>
+                </li>
               </ul>
             </li>
           </ul>
         </div>
       </div>
-    </nav>
+    </nav><br>
     <main>
       <!--* Product info container -->
       <div class="container my-5">
@@ -133,9 +138,9 @@
 
             <p id="prodSoldCount" class="text-muted">Vendidos:</p>
 
-            <a href="cart.html" class="btn btn-outline-dark flex-shrink-0">
-              <i class="fa fa-shopping-cart"> </i> Agregar al carrito</a
-            >
+            <a href="cart.html" class="btn btn-outline-dark flex-shrink-0 btn-add-to-cart">
+              <i class="fa fa-shopping-cart"></i> Agregar al carrito
+          </a>
           </div>
         </div>
       </div>
@@ -172,18 +177,18 @@
               <input type="hidden" id="score" name="opinion" min="1" max="5" />
             </div>
             <button
-              id="send-comment"
-              type="submit"
-              class="btn btn-outline-dark flex-shrink-0"
-            >
-              Enviar
-            </button>
+            id="send-comment"
+            type="submit"
+            class="btn btn-outline-dark flex-shrink-0 btn-send"
+        >
+            Enviar
+        </button>
           </div>
         </form>
       </div>
       <!--* Related products container --><br>
       <div class="container my-5">
-        <h2 class="mb-4">Productos relacionados</h2>
+        <h2 class="mb-4 dark-mode">Productos relacionados</h2>
         <div class="row" id="relProdContainer"></div>
       </div>
     </main>
