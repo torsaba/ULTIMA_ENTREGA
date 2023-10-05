@@ -5,7 +5,7 @@ function showProductList(array) {
   let htmlContentToAppend = "";
   array.forEach((product) => {
     htmlContentToAppend += `
-      <div class="list-group-item list-group-item-action cursor-active">
+      <div class="list-group-item list-group-item-action cursor-active" data-product-id="${product.id}">
         <div class="row">
           <div class="col-3">
             <img src="${
@@ -29,15 +29,16 @@ function showProductList(array) {
   array.length === 0
     ? (productContainer.innerHTML = `<div class="text-center">No hay productos.</div>`)
     : (productContainer.innerHTML = htmlContentToAppend);
+    attachProductClickEvent()
 }
 
 // Agrega un evento click a cada producto en la lista
 function attachProductClickEvent() {
   const productItems = document.querySelectorAll(".list-group-item");
-  productItems.forEach((product, index) => {
+  productItems.forEach((product) => {
     product.addEventListener("click", () => {
       // Obtiene el identificador del producto seleccionado
-      const selectedProductId = productsArray[index].id;
+      const selectedProductId = product.getAttribute("data-product-id")
 
       // Guarda el identificador en el almacenamiento local
       localStorage.setItem("selectedProductId", selectedProductId);
