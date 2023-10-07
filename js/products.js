@@ -5,7 +5,9 @@ function showProductList(array) {
   let htmlContentToAppend = "";
   array.forEach((product) => {
     htmlContentToAppend += `
-      <div class="list-group-item list-group-item-action cursor-active" data-product-id="${product.id}">
+      <div class="list-group-item list-group-item-action cursor-active" data-product-id="${
+        product.id
+      }">
         <div class="row">
           <div class="col-3">
             <img src="${
@@ -29,7 +31,7 @@ function showProductList(array) {
   array.length === 0
     ? (productContainer.innerHTML = `<div class="text-center">No hay productos.</div>`)
     : (productContainer.innerHTML = htmlContentToAppend);
-    attachProductClickEvent()
+  attachProductClickEvent();
 }
 
 // Agrega un evento click a cada producto en la lista
@@ -38,7 +40,7 @@ function attachProductClickEvent() {
   productItems.forEach((product) => {
     product.addEventListener("click", () => {
       // Obtiene el identificador del producto seleccionado
-      const selectedProductId = product.getAttribute("data-product-id")
+      const selectedProductId = product.getAttribute("data-product-id");
 
       // Guarda el identificador en el almacenamiento local
       localStorage.setItem("selectedProductId", selectedProductId);
@@ -134,34 +136,4 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("priceMax").value = "";
       showProductList(productsArray);
     });
-
-    
-    function toggleDarkMode() {
-      const body = document.body;
-      const modeToggleBtn = document.getElementById('mode-toggle');
-    
-      
-
-      // Cambia el modo y guarda la elección en el Local Storage
-      body.classList.toggle('dark-mode'); // Agrega o elimina la clase 'dark-mode' al cuerpo
-      const isDarkMode = body.classList.contains('dark-mode');
-      localStorage.setItem('darkMode', isDarkMode);
-    
-      // Cambia el texto del botón y el ícono según el modo actual
-      if (isDarkMode) {
-        modeToggleBtn.innerHTML = '<i class="fas fa-moon"></i> Modo Oscuro';
-      } else {
-        modeToggleBtn.innerHTML = '<i class="fas fa-sun"></i> Modo Claro';
-      }
-    }
-    
-    // Verifica si el usuario ha seleccionado el modo oscuro previamente
-    const savedDarkMode = localStorage.getItem('darkMode');
-    if (savedDarkMode === 'true') {
-      // Habilita el modo oscuro si se guardó previamente
-      toggleDarkMode();
-    }
-
-// Manejador de eventos para el botón de cambio de modo
-document.getElementById('mode-toggle').addEventListener('click', toggleDarkMode);
 });
