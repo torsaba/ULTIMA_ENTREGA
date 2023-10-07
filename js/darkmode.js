@@ -2,7 +2,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const btnmode = document.getElementById("mode-toggle");
   let isEnabled = DarkReader.isEnabled();
   let selectedMode = localStorage.getItem("darkMode");
-  if (selectedMode === true) {
+
+  if (selectedMode === "true") {
     DarkReader.enable({
       brightness: 100,
       contrast: 90,
@@ -37,6 +38,6 @@ document.addEventListener("DOMContentLoaded", function () {
     isEnabled = !isEnabled;
     changeButton();
 
-    localStorage.setItem("darkMode", isEnabled);
+    localStorage.setItem("darkMode", isEnabled.toString());
   });
 });

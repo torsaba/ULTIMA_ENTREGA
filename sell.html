@@ -37,31 +37,51 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul
-            id="user-DropDown"
-            style="display: none"
-            class="position-absolute bg-dark dropdown-menu dropdown-menu-end"
+            class="navbar-nav w-100 justify-content-between align-items-center"
           >
-            <li>
-              <a class="nav-link" href="my-profile.html">
-                <i class="fa fa-user"></i> Mi perfil</a
-              >
+            <li class="nav-item">
+              <a class="nav-link active" href="index.html"
+                ><img src="img\nav-index.png" alt="eMercado" width="200"
+              /></a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="categories.html">Categorías</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="sell.html">Vender</a>
+            </li>
+            <li id="user-info" class="nav-item">
+              <!-- Enlace para mostrar el botón de cerrar sesión -->
+              <a class="nav-link" id="username-display" href="#"> </a>
+              <!-- Botón de cerrar sesión (oculta inicialmente style="display: none;") -->
+              <ul
+                id="user-DropDown"
+                style="display: none"
+                class="position-absolute bg-dark dropdown-menu dropdown-menu-end"
+              >
+                <li>
+                  <a class="nav-link" href="my-profile.html">
+                    <i class="fa fa-user"></i> Mi perfil</a
+                  >
+                </li>
 
-            <li>
-              <a class="nav-link" href="cart.html">
-                <i class="fa fa-shopping-cart"></i> Mi carrito</a
-              >
-            </li>
+                <li>
+                  <a class="nav-link" href="cart.html">
+                    <i class="fa fa-shopping-cart"></i> Mi carrito</a
+                  >
+                </li>
 
-            <li>
-              <a id="logout" class="nav-link" href="login.html">
-                <i class="fa fa-sign-out-alt"></i> Cerrar sesión</a
-              >
-            </li>
-            <li>
-              <a id="mode-toggle" class="nav-link cursor-active">
-                <i class="fas fa-sun"></i> Modo Claro
-              </a>
+                <li>
+                  <a id="logout" class="nav-link" href="login.html">
+                    <i class="fa fa-sign-out-alt"></i> Cerrar sesión</a
+                  >
+                </li>
+                <li>
+                  <a id="mode-toggle" class="nav-link cursor-active">
+                    <i class="fas fa-sun"></i> Modo Claro
+                  </a>
+                </li>
+              </ul>
             </li>
           </ul>
         </div>
