@@ -34,13 +34,20 @@ async function cargarProductos() { //funcion que agarra los datos del json unica
 
 document.addEventListener("DOMContentLoaded", cargarProductos); // se ejecuta la funcion con DOM
 
-function actualizarSubtotal(productId) { // esta función calcula el subtotal de un producto en función de su cantidad
-    const inputCantidad = document.getElementById(`quantity-${productId}`);
-    const subtotalArticulo = document.getElementById(`subtotal-${productId}`);
+function actualizarSubtotal(productId) {
+    const inputCantidad = document.getElementById(`quantity-${productId}`); // input para cantidad
+    const subtotalArticulo = document.getElementById(`subtotal-${productId}`); // donde se muestra el subtotal
     const unitCost = parseFloat(inputCantidad.closest("tr").querySelector("td:nth-child(3)").textContent);
-    const cantidad = parseInt(inputCantidad.value);
-    const subtotal = unitCost * cantidad;
-    subtotalArticulo.textContent = `${subtotal.toFixed(2)} USD`;
+    const cantidad = inputCantidad.value; // el valor que se ingresa en el input de cantidad
+    const subtotal = unitCost * cantidad; // subtotal - costo unitario * cantidad ingresada
+
+    if (cantidad < 0 || cantidad.includes(".") || cantidad.includes(",")){ // condicion numero positivo y sin decimales
+        subtotalArticulo.textContent = "Error en la cantidad de productos";
+        subtotalArticulo.classList.add("text-danger");
+    } else {
+        subtotalArticulo.textContent = `${subtotal.toFixed(2)} USD`;
+        subtotalArticulo.classList.remove("text-danger");   
+    }
 }
 
 
