@@ -13,7 +13,13 @@ async function cargarProductos() { //funcion que agarra los datos del json unica
         data.articles.forEach(article => {
             const newProduct = document.createElement("tr"); // se crea la celda para cada producto
 
+
             // lo que se crea, esta todo, incluido el boton de eliminar la celda
+
+            const subtotal = article.unitCost * article.count; // Calculamos el subtotal para cada producto
+
+            // lo que se crea, esta todo, incluido el boton de eliminar la celda. Se agrega un evento que llama a la función actualizarSubtotal cuando el usuario cambie la cantidad. 
+
             newProduct.innerHTML = ` 
                 <td><img src="${article.image}" alt="${article.name}" width="150"></td>
                 <td>${article.name}</td>
@@ -24,6 +30,7 @@ async function cargarProductos() { //funcion que agarra los datos del json unica
                 <td><button class="btn btn-danger" onclick="eliminarProducto(${article.id})">Eliminar</button></td>
             `;
 
+            
             cartBody.appendChild(newProduct); // coloca la celda del producto en html mostrandose en la pagina
         });
     } catch (error) {
@@ -33,6 +40,15 @@ async function cargarProductos() { //funcion que agarra los datos del json unica
 
 document.addEventListener("DOMContentLoaded", cargarProductos); // se ejecuta la funcion con DOM
 
+
+function actualizarSubtotal(productId) { // esta función calcula el subtotal de un producto en función de su cantidad
+    const inputCantidad = document.getElementById(`quantity-${productId}`);
+    const subtotalArticulo = document.getElementById(`subtotal-${productId}`);
+    const unitCost = parseFloat(inputCantidad.closest("tr").querySelector("td:nth-child(3)").textContent);
+    const cantidad = parseInt(inputCantidad.value);
+    const subtotal = unitCost * cantidad;
+    subtotalArticulo.textContent = `${subtotal.toFixed(2)}€`;
+}
 
 
 
