@@ -25,7 +25,7 @@ async function cargarProductos() { //funcion que agarra los datos del json unica
                 <td>${article.name}</td>
                 <td>${article.unitCost} ${article.currency}</td>
                 <td><input class="form-control" type="number" min="0" value="${article.count}" 
-                id="quantity-${article.id}"></td>
+                id="quantity-${article.id}"onchange="actualizarSubtotal(${article.id})"></td> 
                 <td class="text-primary" id="subtotal-${article.id}">${article.unitCost * article.count} ${article.currency}</td>
                 <td><button class="btn btn-danger" onclick="eliminarProducto(${article.id})">Eliminar</button></td>
             `;
