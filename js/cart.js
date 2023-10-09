@@ -40,7 +40,7 @@ function actualizarSubtotal(productId) { // esta función calcula el subtotal de
     const unitCost = parseFloat(inputCantidad.closest("tr").querySelector("td:nth-child(3)").textContent);
     const cantidad = parseInt(inputCantidad.value);
     const subtotal = unitCost * cantidad;
-    subtotalArticulo.textContent = `${subtotal.toFixed(2)}€`;
+    subtotalArticulo.textContent = `${subtotal.toFixed(2)} USD`;
 }
 
 
