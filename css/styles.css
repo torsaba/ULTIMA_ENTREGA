@@ -9,6 +9,7 @@
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
 }
 
+
 body.dark-mode {
   background-color: #222;
   color: #cecece;
@@ -250,4 +251,16 @@ a.custom-card:hover {
 }
 w-10{
   width: 10% !important;
+}
+
+.arr-colu {
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 340px) {
+  .arr-colu {
+    flex-direction: column;
+    align-items: center;
+  }
 }
