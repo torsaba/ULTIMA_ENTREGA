@@ -54,23 +54,34 @@ function chargeProductInfo(data) {
   let agregarAlCarrito = document.getElementById("agregarAlCarrito");
 
   agregarAlCarrito.addEventListener("click", () => {
-    const productID = localStorage.getItem("selectedProductId")
+    const productID = localStorage.getItem("selectedProductId");
     const productName = data.name;
     const productCost = data.cost;
     const productImage = data.images[0];
     const productCurrency = data.currency;
-    const productCount = 1;
+    let productCount = 1;
 
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-    cart.push({
+    ObjProd = {
       id: productID,
       name: productName,
       image: productImage,
       cost: productCost,
       currency: productCurrency,
-      count: productCount
-    });
+      count: productCount,
+    };
+
+    const prodIndex = cart.findIndex((product) => product.id === productID);
+
+    if (prodIndex !== -1) {
+      productCount = cart[prodIndex].count + 1;
+      cart.splice(prodIndex, 1);
+      ObjProd.count = productCount;
+      cart.push(ObjProd);
+    } else {
+      cart.push(ObjProd);
+    }
 
     localStorage.setItem("cart", JSON.stringify(cart)); // Guarda el carrito actualizado
   });
