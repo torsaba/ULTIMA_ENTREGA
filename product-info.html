@@ -212,6 +212,32 @@
         <h2 class="mb-4 dark-mode">Productos relacionados</h2>
         <div class="row" id="relProdContainer"></div>
       </div>
+      <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div
+          id="liveToast"
+          class="toast"
+          role="alert"
+          aria-live="assertive"
+          aria-atomic="true"
+          data-bs-autohide="true"
+        >
+          <div class="toast-body">
+            Producto agregado al carrito
+            <div class="mt-2 pt-2 border-top">
+              <a href="cart.html" class="btn btn-success btn-sm">
+                Ir al carrito
+              </a>
+              <button
+                type="button"
+                class="btn btn-secondary btn-sm"
+                data-bs-dismiss="toast"
+              >
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
     <footer class="text-muted">
       <div class="container">
@@ -226,6 +252,7 @@
         </p>
       </div>
     </footer>
+
     <div id="spinner-wrapper">
       <div class="lds-ring">
         <div></div>
