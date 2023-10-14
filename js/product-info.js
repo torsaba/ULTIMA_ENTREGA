@@ -75,7 +75,7 @@ function chargeProductInfo(data) {
     const prodIndex = cart.findIndex((product) => product.id === productID);
 
     if (prodIndex !== -1) {
-      productCount = cart[prodIndex].count + 1;
+      productCount += cart[prodIndex].count;
       cart.splice(prodIndex, 1);
       ObjProd.count = productCount;
       cart.push(ObjProd);
