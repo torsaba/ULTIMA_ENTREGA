@@ -59,7 +59,7 @@ function chargeProductInfo(data) {
     const productCost = data.cost;
     const productImage = data.images[0];
     const productCurrency = data.currency;
-    let productCount = document.getElementById("quantity").value || 1;
+    let productCount = parseInt(document.getElementById("quantity").value) || 1;
 
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
