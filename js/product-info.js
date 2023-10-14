@@ -59,7 +59,7 @@ function chargeProductInfo(data) {
     const productCost = data.cost;
     const productImage = data.images[0];
     const productCurrency = data.currency;
-    let productCount = 1;
+    let productCount = document.getElementById("quantity").value || 1;
 
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -84,6 +84,10 @@ function chargeProductInfo(data) {
     }
 
     localStorage.setItem("cart", JSON.stringify(cart)); // Guarda el carrito actualizado
+
+    const toastLiveExample = document.getElementById("liveToast");
+    const toastBootstrap = new bootstrap.Toast(toastLiveExample);
+    toastBootstrap.show();
   });
 
   title.textContent = data.name;
