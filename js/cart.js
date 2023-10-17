@@ -48,6 +48,7 @@ function actualizarSubtotal(productId) {
         subtotalArticulo.textContent = `${subtotal.toFixed(2)} USD`;
         subtotalArticulo.classList.remove("text-danger");   
     }
+    actualizarTotales(); // Llamamos a la función para actualizar los totales
 }
 
 
@@ -58,6 +59,8 @@ function eliminarProducto(productId) { // esta funcion elimina la celda que elig
         eliminarProd.remove(); // verificacion siempre true, la elimina si damos click al boton
         
     }
+
+    actualizarTotales(); // Llamamos a la función para actualizar los totales
 
 }
 
@@ -104,6 +107,34 @@ function actualizarSubtotalNew(productId) {
         subtotalArticulo.textContent = `${subtotal.toFixed(2)} ${currency}`;
         subtotalArticulo.classList.remove("text-danger");
     }
+    actualizarTotales(); // Llamamos a la función para actualizar los totales
+}
+
+
+
+document.querySelectorAll('input[name="shippingType"]').forEach((input) => {
+    input.addEventListener('change', actualizarTotales);
+});
+
+
+function actualizarTotales() {
+    let subtotalGeneral = 0;
+
+    const subtotales = document.querySelectorAll("[id^='subtotal-']");
+    subtotales.forEach(subtotal => {
+        const subtotalValue = parseFloat(subtotal.textContent.split(' ')[0]);
+        subtotalGeneral += subtotalValue;
+    });
+
+    const shippingType = document.querySelector('input[name="shippingType"]:checked');
+    const costoEnvio = subtotalGeneral * parseFloat(shippingType.value);
+
+    const totalPagar = subtotalGeneral + costoEnvio;
+
+    document.getElementById('subtotal').textContent = subtotalGeneral.toFixed(2);
+    document.getElementById('shippingCost').textContent = costoEnvio.toFixed(2);
+    document.getElementById('total').textContent = totalPagar.toFixed(2);
+    
 }
 
 function eliminarProductoNew(productId) {
@@ -128,4 +159,6 @@ function eliminarProductoNew(productId) {
     if (eliminarProd) {
         eliminarProd.remove();
     }
+    actualizarTotales(); // Llamamos a la función para actualizar los totales
+
 }
