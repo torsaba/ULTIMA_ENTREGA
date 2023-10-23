@@ -59,7 +59,7 @@ function chargeProductInfo(data) {
     const productCost = data.cost;
     const productImage = data.images[0];
     const productCurrency = data.currency;
-    let productCount = 1;
+    let productCount = parseInt(document.getElementById("quantity").value) || 1;
 
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -75,7 +75,7 @@ function chargeProductInfo(data) {
     const prodIndex = cart.findIndex((product) => product.id === productID);
 
     if (prodIndex !== -1) {
-      productCount = cart[prodIndex].count + 1;
+      productCount += cart[prodIndex].count;
       cart.splice(prodIndex, 1);
       ObjProd.count = productCount;
       cart.push(ObjProd);
@@ -84,6 +84,10 @@ function chargeProductInfo(data) {
     }
 
     localStorage.setItem("cart", JSON.stringify(cart)); // Guarda el carrito actualizado
+
+    const toastLiveExample = document.getElementById("liveToast");
+    const toastBootstrap = new bootstrap.Toast(toastLiveExample);
+    toastBootstrap.show();
   });
 
   title.textContent = data.name;
