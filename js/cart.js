@@ -117,6 +117,7 @@ document.querySelectorAll('input[name="shippingType"]').forEach((input) => {
 });
 
 
+
 function actualizarTotales() {
     let subtotalGeneral = 0;
 
