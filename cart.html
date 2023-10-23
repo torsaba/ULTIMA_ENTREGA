@@ -175,9 +175,53 @@
           </div>
         </form>
         <hr />
+        <!-- MODAL Consigna 2-->
+        <div class="modal" id="paymentModal" tabindex="-1">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Seleccionar Forma de Pago</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+              </div>
+              <div class="modal-body">
+                <p>Seleccione su forma de pago:</p>
+                <form id="paymentForm">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="tipoDePago" id="tarjetaDeCredito" value="Tarjeta de Crédito" required>
+                    <label class="form-check-label" for="tarjetaDeCredito">Tarjeta de Crédito</label>
+                  </div>
+                  <div id="camposTarjetaDeCredito" style="display: none;">
+                    <div class="mb-3">
+                      <label for="numeroDeTarjeta" class="form-label">Número de Tarjeta</label>
+                      <input type="text" class="form-control" id="numeroDeTarjeta" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="cvv" class="form-label">Código de Seguridad (CVV)</label>
+                      <input type="text" class="form-control" id="cvv" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="fechaDeVencimiento" class="form-label">Fecha de Vencimiento</label>
+                      <input type="text" class="form-control" id="fechaDeVencimiento" required>
+                    </div>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="tipoDePago" id="transferenciaBancaria" value="Transferencia Bancaria">
+                    <label class="form-check-label" for="transferenciaBancaria">Transferencia Bancaria</label>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="confirmarPago">Confirmar Pago</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <span id="estadoDePago">Aún no ha seleccionado la forma de pago</span><br>
+        <button type="button" class="btn btn-primary" id="abrirModalDePago" onclick="mostrarModalDePago()">Seleccionar Forma de Pago</button>
+        <hr>
       </div>
     </main>
-
     <footer class="text-muted">
       <div class="container">
         <p class="float-end">

@@ -129,3 +129,34 @@ function eliminarProductoNew(productId) {
         eliminarProd.remove();
     }
 }
+
+// Consigna 2 (Modal)
+function mostrarModalDePago() {
+    const modalDePago = new bootstrap.Modal(document.getElementById('paymentModal'), {
+      backdrop: 'static',
+      keyboard: false
+    });
+    modalDePago.show();
+  }
+  
+  document.getElementById('confirmarPago').addEventListener('click', function() {
+    const formularioDePago = document.getElementById('paymentForm');
+    const formaDePagoSeleccionada = formularioDePago.querySelector('input[name="tipoDePago"]:checked');
+    if (formaDePagoSeleccionada) {
+      const tipoDePago = formaDePagoSeleccionada.value;
+      // Actualiza la descripción con la forma de pago seleccionada
+      document.getElementById('estadoDePago').textContent = `Forma de pago seleccionada: ${tipoDePago}`;
+      mostrarModalDePago(); // Cierra el modal después de realizar alguna acción
+    } else {
+      alert('Por favor, seleccione una forma de pago.');
+    }
+  });
+  
+  document.querySelector('input[name="tipoDePago"]').addEventListener('change', function() {
+    const camposTarjetaDeCredito = document.getElementById('camposTarjetaDeCredito');
+    if (this.value === 'Tarjeta de Crédito') {
+      camposTarjetaDeCredito.style.display = 'block'; // Muestra los campos de tarjeta de crédito
+    } else {
+      camposTarjetaDeCredito.style.display = 'none'; // Oculta los campos de tarjeta de crédito
+    }
+  });
