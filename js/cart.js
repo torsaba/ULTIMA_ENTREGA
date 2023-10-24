@@ -32,9 +32,7 @@ async function cargarProductos() {
       })"></td> 
                 <td class="text-primary" id="subtotal-${
                   article.id
-                }">${Intl.NumberFormat("es-ES").format(subtotal)} ${
-        article.currency
-      }</td>
+                }">${subtotal.toFixed(2)} ${article.currency}</td>
                 <td><button class="btn btn-danger" onclick="eliminarProducto(${
                   article.id
                 })">Eliminar</button></td>
@@ -60,11 +58,8 @@ function actualizarTotales() {
 
   const subtotales = document.querySelectorAll("[id^='subtotal-']");
   subtotales.forEach((subtotal) => {
-    let subtotalValue = parseFloat(
-      subtotal.textContent.split(" ")[0].replace(/\./g, "")
-    );
-    console.log(subtotal.textContent.split(" ")[0].replace(/\./g, ""));
-    let subtotalCurrency = subtotal.textContent.split(" ")[1];
+    const subtotalValue = parseFloat(subtotal.textContent.split(" ")[0]);
+    const subtotalCurrency = subtotal.textContent.split(" ")[1];
     if (subtotalCurrency == "UYU") {
       subtotalGeneral += subtotalValue / 40;
     } else {
@@ -175,9 +170,7 @@ document.addEventListener("DOMContentLoaded", function () {
     })"></td> 
             <td class="text-primary" id="subtotal-${
               product.index
-            }">${Intl.NumberFormat("es-ES").format(subtotal)} ${
-      product.currency
-    }</td>
+            }">${subtotal.toFixed(2)} ${product.currency}</td>
             <td><button id="${
               product.index
             }" class="btn btn-danger" onclick="eliminarProductoNew(${
