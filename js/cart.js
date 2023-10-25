@@ -19,23 +19,18 @@ async function cargarProductos() {
 
       // lo que se crea, esta todo, incluido el boton de eliminar la celda. Se agrega un evento que llama a la función actualizarSubtotal cuando el usuario cambie la cantidad.
       newProduct.innerHTML = ` 
-                <td><img src="${article.image}" alt="${
-        article.name
-      }" width="150"></td>
+                <td><img src="${article.image}" alt="${article.name
+        }" width="150"></td>
                 <td>${article.name}</td>
                 <td>${article.unitCost} ${article.currency}</td>
-                <td><input class="form-control" type="number" min="0" value="${
-                  article.count
-                }" 
-                id="quantity-${article.id}" onchange="actualizarSubtotal(${
-        article.id
-      })"></td> 
-                <td class="text-primary" id="subtotal-${
-                  article.id
-                }">${subtotal.toFixed(2)} ${article.currency}</td>
-                <td><button class="btn btn-danger" onclick="eliminarProducto(${
-                  article.id
-                })">Eliminar</button></td>
+                <td><input class="form-control" type="number" min="0" value="${article.count
+        }" 
+                id="quantity-${article.id}" onchange="actualizarSubtotal(${article.id
+        })"></td> 
+                <td class="text-primary" id="subtotal-${article.id
+        }">${subtotal.toFixed(2)} ${article.currency}</td>
+                <td><button class="btn btn-danger" onclick="eliminarProducto(${article.id
+        })">Eliminar</button></td>
             `;
 
       cartBody.appendChild(newProduct); // coloca la celda del producto en html mostrandose en la pagina
@@ -91,25 +86,19 @@ document.addEventListener("DOMContentLoaded", function () {
     let productCount = 1;
     const subtotal = product.cost * product.count;
     row.innerHTML = `
-            <td><img src="${product.image}" alt="${
-      product.name
-    }" width="150"></td>
+            <td><img src="${product.image}" alt="${product.name
+      }" width="150"></td>
             <td>${product.name}</td>
             <td>${product.cost} ${product.currency}
-            <td><input class="form-control" type="number" min="0" value="${
-              product.count
-            }" 
-            id="quantity-${product.index}" onchange="actualizarSubtotalNew(${
-      product.index
-    })"></td> 
-            <td class="text-primary" id="subtotal-${
-              product.index
-            }">${subtotal.toFixed(2)} ${product.currency}</td>
-            <td><button id="${
-              product.index
-            }" class="btn btn-danger" onclick="eliminarProductoNew(${
-      product.index
-    })">Eliminar</button></td>
+            <td><input class="form-control" type="number" min="0" value="${product.count
+      }" 
+            id="quantity-${product.index}" onchange="actualizarSubtotalNew(${product.index
+      })"></td> 
+            <td class="text-primary" id="subtotal-${product.index
+      }">${subtotal.toFixed(2)} ${product.currency}</td>
+            <td><button id="${product.index
+      }" class="btn btn-danger" onclick="eliminarProductoNew(${product.index
+      })">Eliminar</button></td>
         `;
 
     cartTable.appendChild(row);
@@ -170,6 +159,7 @@ function eliminarProductoNew(productId) {
 }
 
 // Consigna 2 (Modal)
+let estadoDePago = "Aún no ha seleccionado la forma de pago";
 function mostrarModalDePago() {
   const modalDePago = new bootstrap.Modal(
     document.getElementById("paymentModal"),
@@ -188,11 +178,11 @@ document.getElementById("confirmarPago").addEventListener("click", function () {
   );
   if (formaDePagoSeleccionada) {
     const tipoDePago = formaDePagoSeleccionada.value;
-    // Actualiza la descripción con la forma de pago seleccionada
+    estadoDePago = `Forma de pago seleccionada: ${tipoDePago}`; // Actualiza la descripción con la forma de pago seleccionada
     document.getElementById(
       "estadoDePago"
-    ).textContent = `Forma de pago seleccionada: ${tipoDePago}`;
-    mostrarModalDePago(); // Cierra el modal después de realizar alguna acción
+    ).textContent = estadoDePago;
+    mostrarModalDePago.hide(); // Cierra el modal después de realizar alguna acción
   } else {
     alert("Por favor, seleccione una forma de pago.");
   }
@@ -211,5 +201,7 @@ document.querySelectorAll('input[name="tipoDePago"]').forEach((item) => {
       camposTarjetaDeCredito.style.display = "none"; // Oculta los campos de tarjeta de crédito
       camposTransferencia.style.display = "block"; // Muestra los campos de transferencia bancaria
     }
+    estadoDePago = `Forma de pago seleccionada: ${e.target.value}`;
+    document.getElementById("estadoDePago").textContent = estadoDePago;
   });
 });
