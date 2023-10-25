@@ -19,24 +19,92 @@ async function cargarProductos() {
 
       // lo que se crea, esta todo, incluido el boton de eliminar la celda. Se agrega un evento que llama a la función actualizarSubtotal cuando el usuario cambie la cantidad.
       newProduct.innerHTML = ` 
-                <td><img src="${article.image}" alt="${article.name
-        }" width="150"></td>
+                <td><img src="${article.image}" alt="${
+        article.name
+      }" width="150"></td>
                 <td>${article.name}</td>
                 <td>${article.unitCost} ${article.currency}</td>
-                <td><input class="form-control" type="number" min="0" value="${article.count
-        }" 
-                id="quantity-${article.id}" onchange="actualizarSubtotal(${article.id
-        })"></td> 
-                <td class="text-primary" id="subtotal-${article.id
-        }">${subtotal.toFixed(2)} ${article.currency}</td>
-                <td><button class="btn btn-danger" onclick="eliminarProducto(${article.id
-        })">Eliminar</button></td>
+                <td><input class="form-control" type="number" min="0" value="${
+                  article.count
+                }" 
+                id="quantity-${article.id}" onchange="actualizarSubtotal(${
+        article.id
+      })"></td> 
+                <td class="text-primary" id="subtotal-${
+                  article.id
+                }">${subtotal.toFixed(2)} ${article.currency}</td>
+                <td><button class="btn btn-danger" onclick="eliminarProducto(${
+                  article.id
+                })">Eliminar</button></td>
             `;
 
       cartBody.appendChild(newProduct); // coloca la celda del producto en html mostrandose en la pagina
     });
   } catch (error) {
     console.error("Error en la solicitud:", error);
+  }
+  actualizarTotales(); // Llamamos a la función para actualizar los totales
+}
+
+function actualizarTotales() {
+  let subtotalGeneral = 0;
+
+  let costoEnvio = 0;
+  let totalPagar;
+
+  const currencyType = document.querySelector(
+    'input[name="currencyType"]:checked'
+  );
+
+  const subtotales = document.querySelectorAll("[id^='subtotal-']");
+  subtotales.forEach((subtotal) => {
+    const subtotalValue = parseFloat(subtotal.textContent.split(" ")[0]);
+    const subtotalCurrency = subtotal.textContent.split(" ")[1];
+    if (subtotalCurrency == "UYU") {
+      subtotalGeneral += subtotalValue / 40;
+    } else {
+      subtotalGeneral += subtotalValue;
+    }
+  });
+
+  if (currencyType.value == "UYU") {
+    subtotalGeneral *= 40;
+  }
+
+  const shippingType = document.querySelector(
+    'input[name="shippingType"]:checked'
+  );
+
+  if (shippingType) {
+    costoEnvio = subtotalGeneral * parseFloat(shippingType.value);
+    totalPagar = subtotalGeneral + costoEnvio;
+
+    document.getElementById("subtotal").textContent =
+      currencyType.value +
+      " " +
+      Intl.NumberFormat("es-ES").format(subtotalGeneral);
+    document
+      .getElementById("shippingCost")
+      .classList.remove("text-danger", "fw-bold");
+
+    document.getElementById("shippingCost").textContent =
+      currencyType.value + " " + Intl.NumberFormat("es-ES").format(costoEnvio);
+    document.getElementById("total").textContent =
+      currencyType.value + " " + Intl.NumberFormat("es-ES").format(totalPagar);
+  } else {
+    document.getElementById("subtotal").textContent =
+      currencyType.value +
+      " " +
+      Intl.NumberFormat("es-ES").format(subtotalGeneral);
+    document
+      .getElementById("shippingCost")
+      .classList.add("text-danger", "fw-bold");
+
+    document.getElementById("shippingCost").textContent = "Seleccione envío";
+    document.getElementById("total").textContent =
+      currencyType.value +
+      " " +
+      Intl.NumberFormat("es-ES").format(subtotalGeneral.toFixed(2));
   }
 }
 
@@ -59,6 +127,7 @@ function actualizarSubtotal(productId) {
     subtotalArticulo.textContent = `${subtotal.toFixed(2)} USD`;
     subtotalArticulo.classList.remove("text-danger");
   }
+  actualizarTotales(); // Llamamos a la función para actualizar los totales
 }
 
 function eliminarProducto(productId) {
@@ -69,6 +138,8 @@ function eliminarProducto(productId) {
   if (eliminarProd) {
     eliminarProd.remove(); // verificacion siempre true, la elimina si damos click al boton
   }
+
+  actualizarTotales(); // Llamamos a la función para actualizar los totales
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -86,19 +157,25 @@ document.addEventListener("DOMContentLoaded", function () {
     let productCount = 1;
     const subtotal = product.cost * product.count;
     row.innerHTML = `
-            <td><img src="${product.image}" alt="${product.name
-      }" width="150"></td>
+            <td><img src="${product.image}" alt="${
+      product.name
+    }" width="150"></td>
             <td>${product.name}</td>
             <td>${product.cost} ${product.currency}
-            <td><input class="form-control" type="number" min="0" value="${product.count
-      }" 
-            id="quantity-${product.index}" onchange="actualizarSubtotalNew(${product.index
-      })"></td> 
-            <td class="text-primary" id="subtotal-${product.index
-      }">${subtotal.toFixed(2)} ${product.currency}</td>
-            <td><button id="${product.index
-      }" class="btn btn-danger" onclick="eliminarProductoNew(${product.index
-      })">Eliminar</button></td>
+            <td><input class="form-control" type="number" min="0" value="${
+              product.count
+            }" 
+            id="quantity-${product.index}" onchange="actualizarSubtotalNew(${
+      product.index
+    })"></td> 
+            <td class="text-primary" id="subtotal-${
+              product.index
+            }">${subtotal.toFixed(2)} ${product.currency}</td>
+            <td><button id="${
+              product.index
+            }" class="btn btn-danger" onclick="eliminarProductoNew(${
+      product.index
+    })">Eliminar</button></td>
         `;
 
     cartTable.appendChild(row);
@@ -130,7 +207,12 @@ function actualizarSubtotalNew(productId) {
     subtotalArticulo.textContent = `${subtotal.toFixed(2)} ${currency}`;
     subtotalArticulo.classList.remove("text-danger");
   }
+  actualizarTotales(); // Llamamos a la función para actualizar los totales
 }
+
+document.querySelectorAll('input[name="shippingType"]').forEach((input) => {
+  input.addEventListener("change", actualizarTotales);
+});
 
 function eliminarProductoNew(productId) {
   // Obtén el carrito actual del Local Storage
@@ -179,9 +261,7 @@ document.getElementById("confirmarPago").addEventListener("click", function () {
   if (formaDePagoSeleccionada) {
     const tipoDePago = formaDePagoSeleccionada.value;
     estadoDePago = `Forma de pago seleccionada: ${tipoDePago}`; // Actualiza la descripción con la forma de pago seleccionada
-    document.getElementById(
-      "estadoDePago"
-    ).textContent = estadoDePago;
+    document.getElementById("estadoDePago").textContent = estadoDePago;
     mostrarModalDePago.hide(); // Cierra el modal después de realizar alguna acción
   } else {
     alert("Por favor, seleccione una forma de pago.");
@@ -203,5 +283,13 @@ document.querySelectorAll('input[name="tipoDePago"]').forEach((item) => {
     }
     estadoDePago = `Forma de pago seleccionada: ${e.target.value}`;
     document.getElementById("estadoDePago").textContent = estadoDePago;
+    actualizarTotales(); // Llamamos a la función para actualizar los totales
   });
 });
+
+document
+  .getElementById("formCurrency")
+  .querySelectorAll("input")
+  .forEach((input) => {
+    input.addEventListener("change", actualizarTotales);
+  });
