@@ -238,8 +238,54 @@ function eliminarProductoNew(productId) {
   if (eliminarProd) {
     eliminarProd.remove();
   }
-  actualizarTotales(); // Llamamos a la función para actualizar los totales
 }
+
+// Consigna 2 (Modal)
+let estadoDePago = "Aún no ha seleccionado la forma de pago";
+function mostrarModalDePago() {
+  const modalDePago = new bootstrap.Modal(
+    document.getElementById("paymentModal"),
+    {
+      backdrop: "static",
+      keyboard: false,
+    }
+  );
+  modalDePago.show();
+}
+
+document.getElementById("confirmarPago").addEventListener("click", function () {
+  const formularioDePago = document.getElementById("paymentForm");
+  const formaDePagoSeleccionada = formularioDePago.querySelector(
+    'input[name="tipoDePago"]:checked'
+  );
+  if (formaDePagoSeleccionada) {
+    const tipoDePago = formaDePagoSeleccionada.value;
+    estadoDePago = `Forma de pago seleccionada: ${tipoDePago}`; // Actualiza la descripción con la forma de pago seleccionada
+    document.getElementById("estadoDePago").textContent = estadoDePago;
+    mostrarModalDePago.hide(); // Cierra el modal después de realizar alguna acción
+  } else {
+    alert("Por favor, seleccione una forma de pago.");
+  }
+});
+
+document.querySelectorAll('input[name="tipoDePago"]').forEach((item) => {
+  item.addEventListener("change", (e) => {
+    const camposTarjetaDeCredito = document.getElementById(
+      "camposTarjetaDeCredito"
+    );
+    const camposTransferencia = document.getElementById("camposTransferencia");
+    if (e.target.value === "Tarjeta de Crédito") {
+      camposTarjetaDeCredito.style.display = "block"; // Muestra los campos de tarjeta de crédito
+      camposTransferencia.style.display = "none"; // Oculta los campos de transferencia bancaria
+    } else if (e.target.value === "Transferencia Bancaria") {
+      camposTarjetaDeCredito.style.display = "none"; // Oculta los campos de tarjeta de crédito
+      camposTransferencia.style.display = "block"; // Muestra los campos de transferencia bancaria
+    }
+    estadoDePago = `Forma de pago seleccionada: ${e.target.value}`;
+    document.getElementById("estadoDePago").textContent = estadoDePago;
+    actualizarTotales(); // Llamamos a la función para actualizar los totales
+  });
+});
 
 document
   .getElementById("formCurrency")
