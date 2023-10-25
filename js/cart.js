@@ -24,10 +24,10 @@ async function cargarProductos() {
       }" width="150"></td>
                 <td>${article.name}</td>
                 <td>${article.unitCost} ${article.currency}</td>
-                <td><input class="form-control" type="number" min="0" value="${
+                <td><input class="form-control" type="number" min="1" value="${
                   article.count
                 }" 
-                id="quantity-${article.id}" onchange="actualizarSubtotal(${
+                id="quantity-${article.id}" onchange="actualizarSubtotalNew(${
         article.id
       })"></td> 
                 <td class="text-primary" id="subtotal-${
@@ -75,40 +75,40 @@ function actualizarTotales() {
     'input[name="shippingType"]:checked'
   );
 
+  let strSubTotal = !isNaN(subtotalGeneral)
+    ? currencyType.value +
+      " " +
+      Intl.NumberFormat("es-ES").format(subtotalGeneral)
+    : "Error en la cantidad de productos";
+
   if (shippingType) {
     costoEnvio = subtotalGeneral * parseFloat(shippingType.value);
     totalPagar = subtotalGeneral + costoEnvio;
 
-    document.getElementById("subtotal").textContent =
-      currencyType.value +
-      " " +
-      Intl.NumberFormat("es-ES").format(subtotalGeneral);
+    let strCostoEnvio = !isNaN(costoEnvio)
+      ? currencyType.value + " " + Intl.NumberFormat("es-ES").format(costoEnvio)
+      : "Error en el envío";
+    let strTotalPagar = !isNaN(totalPagar)
+      ? currencyType.value + " " + Intl.NumberFormat("es-ES").format(totalPagar)
+      : "Error en la cantidad de productos";
+
+    document.getElementById("subtotal").textContent = strSubTotal;
     document
       .getElementById("shippingCost")
       .classList.remove("text-danger", "fw-bold");
 
-    document.getElementById("shippingCost").textContent =
-      currencyType.value + " " + Intl.NumberFormat("es-ES").format(costoEnvio);
-    document.getElementById("total").textContent =
-      currencyType.value + " " + Intl.NumberFormat("es-ES").format(totalPagar);
+    document.getElementById("shippingCost").textContent = strCostoEnvio;
+    document.getElementById("total").textContent = strTotalPagar;
   } else {
-    document.getElementById("subtotal").textContent =
-      currencyType.value +
-      " " +
-      Intl.NumberFormat("es-ES").format(subtotalGeneral);
+    document.getElementById("subtotal").textContent = strSubTotal;
     document
       .getElementById("shippingCost")
       .classList.add("text-danger", "fw-bold");
 
     document.getElementById("shippingCost").textContent = "Seleccione envío";
-    document.getElementById("total").textContent =
-      currencyType.value +
-      " " +
-      Intl.NumberFormat("es-ES").format(subtotalGeneral.toFixed(2));
+    document.getElementById("total").textContent = strSubTotal;
   }
 }
-
-document.addEventListener("DOMContentLoaded", cargarProductos); // se ejecuta la funcion con DOM
 
 function actualizarSubtotal(productId) {
   const inputCantidad = document.getElementById(`quantity-${productId}`); // input para cantidad
@@ -143,6 +143,8 @@ function eliminarProducto(productId) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+  cargarProductos(); // Llamamos a la función para cargar los productos
+
   const cartTable = document.getElementById("cart-products");
 
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -162,7 +164,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }" width="150"></td>
             <td>${product.name}</td>
             <td>${product.cost} ${product.currency}
-            <td><input class="form-control" type="number" min="0" value="${
+            <td><input class="form-control" type="number" min="1" value="${
               product.count
             }" 
             id="quantity-${product.index}" onchange="actualizarSubtotalNew(${
@@ -191,8 +193,8 @@ function actualizarSubtotalNew(productId) {
   const cantidad = inputCantidad.value;
 
   if (
-    cantidad === "" ||
-    cantidad < 0 ||
+    cantidad.trim() === "" ||
+    cantidad <= 0 ||
     cantidad.includes(".") ||
     cantidad.includes(",")
   ) {
@@ -262,7 +264,6 @@ document.getElementById("confirmarPago").addEventListener("click", function () {
     const tipoDePago = formaDePagoSeleccionada.value;
     estadoDePago = `Forma de pago seleccionada: ${tipoDePago}`; // Actualiza la descripción con la forma de pago seleccionada
     document.getElementById("estadoDePago").textContent = estadoDePago;
-    mostrarModalDePago.hide(); // Cierra el modal después de realizar alguna acción
   } else {
     alert("Por favor, seleccione una forma de pago.");
   }
@@ -284,6 +285,7 @@ document.querySelectorAll('input[name="tipoDePago"]').forEach((item) => {
     estadoDePago = `Forma de pago seleccionada: ${e.target.value}`;
     document.getElementById("estadoDePago").textContent = estadoDePago;
     actualizarTotales(); // Llamamos a la función para actualizar los totales
+    item.closest(`input[type="text"]`).focus();
   });
 });
 
@@ -293,3 +295,123 @@ document
   .forEach((input) => {
     input.addEventListener("change", actualizarTotales);
   });
+document.getElementById("confirmarCompra").addEventListener("click", () => {
+  validarCompra();
+  document.querySelectorAll("form").forEach((form) => {
+    form.querySelectorAll("input").forEach((input) => {
+      input.addEventListener("input", validarCompra);
+      input.addEventListener("change", validarCompra);
+      input.addEventListener("focus", validarCompra);
+    });
+  });
+  confirmarCompra();
+});
+function confirmarCompra() {
+  if (validarCompra()) {
+    alert("Gracias por su compra");
+    localStorage.removeItem("cart");
+    window.location.reload();
+  }
+}
+
+function validarCompra() {
+  const formEnvio = document.getElementById("formEnvio");
+  const formEnvioOK = formEnvio.querySelector(
+    'input[name="shippingType"]:checked'
+  )
+    ? true
+    : false;
+
+  const formCurrency = document.getElementById("formCurrency");
+  const formCurrencyOK = formCurrency.querySelector(
+    'input[name="currencyType"]:checked'
+  )
+    ? true
+    : false;
+
+  const formPago = document.getElementById("paymentForm");
+  let formPagoOK = formPago.querySelector('input[name="tipoDePago"]:checked')
+    ? true
+    : false;
+
+  formPago.querySelectorAll('input[type="text"]').forEach((input) => {
+    if (input.offsetParent !== null) {
+      if (input.value.trim() === "") {
+        input.classList.add("is-invalid");
+        input.classList.remove("is-valid");
+        formPagoOK = false;
+      } else {
+        input.classList.remove("is-invalid");
+        input.classList.add("is-valid");
+      }
+    }
+  });
+
+  const formDir = document.getElementById("formDireccion");
+  const formDirOK =
+    formDir.querySelector("#street").value.trim() !== "" &&
+    formDir.querySelector("#stnumber").value.trim() !== "" &&
+    formDir.querySelector("#stcorner").value.trim() !== "";
+
+  let subtotales = document.querySelectorAll("[id^='subtotal-']");
+  let subtotalesOK = true;
+  subtotales.forEach((subtotal) => {
+    if (subtotal.textContent.includes("Error")) {
+      subtotalesOK = false;
+    }
+  });
+
+  function setValid(form) {
+    form.classList.add("is-valid");
+    form.classList.remove("is-invalid");
+    if (form !== formPago) {
+      form.querySelector(".invalid-feedback").textContent = "";
+    } else {
+      document.querySelector("#invalid-feedback-payment").textContent = "";
+    }
+  }
+
+  if (!formEnvioOK) {
+    formEnvio.classList.add("is-invalid");
+    formEnvio.classList.remove("is-valid");
+    formEnvio.querySelector(".invalid-feedback").textContent =
+      "Por favor, seleccione un tipo de envío.";
+  } else {
+    setValid(formEnvio);
+  }
+
+  formDir.querySelectorAll("input").forEach((input) => {
+    if (input.value.trim() === "") {
+      input.classList.add("is-invalid");
+      input.classList.remove("is-valid");
+    } else {
+      input.classList.remove("is-invalid");
+      input.classList.add("is-valid");
+    }
+  });
+
+  if (!formCurrencyOK) {
+    formCurrency.classList.add("is-invalid");
+    formCurrency.classList.remove("is-valid");
+    formCurrency.querySelector(".invalid-feedback").textContent =
+      "Por favor, seleccione un tipo de moneda.";
+  } else {
+    setValid(formCurrency);
+  }
+
+  if (!formPagoOK) {
+    formPago.classList.add("is-invalid");
+    formPago.classList.remove("is-valid");
+    document.querySelector("#invalid-feedback-payment").textContent =
+      "Por favor, seleccione una forma de pago.";
+  } else {
+    setValid(formPago);
+  }
+
+  console.log(
+    `Currency: ${formCurrencyOK}\nShipping: ${formEnvioOK}\nPayment: ${formPagoOK}\nAdress: ${formDirOK}\nTotals: ${subtotalesOK}`
+  );
+  return (
+    formCurrencyOK && formEnvioOK && formPagoOK && formDirOK && subtotalesOK
+  );
+}

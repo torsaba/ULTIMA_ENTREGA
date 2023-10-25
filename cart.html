@@ -114,7 +114,12 @@
           </table>
         </div>
         <hr />
-        <form class="row pt-4 needs-validation" novalidate>
+        <form
+          class="row pt-4 needs-validation"
+          id="formEnvio"
+          onsubmit="return false;"
+          novalidate
+        >
           <h5 class="pb-2">Tipo de envío</h5>
           <div class="form-check">
             <input
@@ -155,6 +160,7 @@
               Standard 12 a 15 días (5%)
             </label>
           </div>
+          <div class="invalid-feedback d-block"></div>
         </form>
         <form id="formCurrency" class="row pt-4 needs-validation">
           <h5 class="pb-2 mt-3">Tipo de moneda</h5>
@@ -187,8 +193,13 @@
               Dólares
             </label>
           </div>
+          <div class="invalid-feedback d-block"></div>
         </form>
-        <form class="row pt-4 pb-2 needs-validation" novalidate>
+        <form
+          class="row pt-4 pb-2 needs-validation"
+          id="formDireccion"
+          novalidate
+        >
           <h5>Dirección de envío</h5>
           <div class="row row-cols-2 gy-3 ge-5 mt-0 ps-0">
             <div class="col">
@@ -224,7 +235,7 @@
               </div>
               <div class="modal-body">
                 <p>Seleccione su forma de pago:</p>
-                <form id="paymentForm">
+                <form id="paymentForm" onsubmit="return false;" novalidate>
                   <div class="form-check">
                     <input
                       class="form-check-input"
@@ -295,7 +306,7 @@
                       <input
                         type="text"
                         class="form-control"
-                        id="numeroDeTarjeta"
+                        id="numeroDeCuenta"
                         required
                       />
                     </div>
@@ -325,6 +336,11 @@
         >
           Seleccionar Forma de Pago
         </button>
+        <div
+          class="invalid-feedback d-block"
+          id="invalid-feedback-payment"
+        ></div>
+
         <hr />
         <div class="col">
           <div class="row pt-4">
@@ -341,7 +357,7 @@
                   <div
                     class="col-2 d-flex justify-content-center align-self-center"
                   >
-                    <span id="subtotal" class="m-0">0</span>
+                    <span id="subtotal" class="m-0 text-center">0</span>
                   </div>
                 </div>
               </div>
@@ -355,7 +371,9 @@
                   <div
                     class="col-2 d-flex justify-content-center align-self-center"
                   >
-                    <span id="shippingCost" class="m-0">Seleccione envío</span>
+                    <span id="shippingCost" class="m-0 text-center"
+                      >Seleccione envío</span
+                    >
                   </div>
                 </div>
               </div>
@@ -368,12 +386,24 @@
                   <div
                     class="col-2 d-flex justify-content-center align-self-center"
                   >
-                    <span id="total" class="m-0 fw-bold">0</span>
+                    <span id="total" class="m-0 fw-bold text-center">0</span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col text-center">
+          <button
+            type="submit"
+            form="formEnvio formDireccion paymentForm"
+            class="btn btn-success mt-5 p-3"
+            id="confirmarCompra"
+          >
+            Confirmar Compra
+          </button>
         </div>
       </div>
     </main>
