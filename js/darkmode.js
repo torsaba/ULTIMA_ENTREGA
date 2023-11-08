@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
       sepia: 0,
     });
     isEnabled = true;
-    imgJumbo.style.backgroundImage = "url(../img/cover_back_black_mode.png)";
+    imgJumbo.style.backgroundImage = `url('../img/cover_back_black_mode.png')`;
   } else {
     DarkReader.disable();
     isEnabled = false;
@@ -30,14 +30,14 @@ document.addEventListener("DOMContentLoaded", function () {
   btnmode.addEventListener("click", () => {
     if (isEnabled) {
       DarkReader.disable();
-      imgJumbo.style.backgroundImage = "url(../img/cover_back.png)";
+      imgJumbo.style.backgroundImage = `url('../img/cover_back.png')`;
     } else {
       DarkReader.enable({
         brightness: 100,
         contrast: 90,
         sepia: 0,
       });
-      imgJumbo.style.backgroundImage = "url(../img/cover_back_black_mode.png)";
+      imgJumbo.style.backgroundImage = `url('../img/cover_back_black_mode.png')`;
     }
     isEnabled = !isEnabled;
     changeButton();
