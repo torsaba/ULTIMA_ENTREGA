@@ -109,8 +109,21 @@
       <div class="container">
         <div class="row">
           <div class="container mt-4">
-            <h2>Perfil</h2>
-            <hr />
+            <div class="row mb-0" style="height: 15vh">
+              <div class="col-9 justify-content-center align-content-center">
+                <h2 class="mt-4">Perfil</h2>
+                <hr />
+              </div>
+              <div class="col-3 justify-content-end align-content-end">
+                <img
+                  src="https://canadabeercup.com/wp-content/uploads/2022/09/generic-profile-picture-1200x1200-1.jpg"
+                  alt=""
+                  class="img-thumbnail float-end"
+                  id="profile-img"
+                  style="object-fit: cover; width: 15vh; height: 15vh"
+                />
+              </div>
+            </div>
             <form id="profile-form">
               <div class="row">
                 <div class="col-md-6">
@@ -184,23 +197,25 @@
                     />
                   </div>
                 </div>
-                <div class="col-md-6">
-                  <div class="mb-3">
-                    <div class="input-div">
-                      <p>
-                        Arrastre una imagen de perfil o
-                        <span class="browse">seleccione una</span>.
-                      </p>
+                <div class="row m-0 w-100">
+                  <div class="mb-3 p-0">
+                    <div class="input-div w-100">
+                      <label for="formFileLg" class="form-label">
+                        Foto de perfil
+                      </label>
                       <input
+                        class="form-control form-control-lg w-100"
+                        id="Img"
                         type="file"
-                        class="file"
-                        accept="image/png, image/jpeg, image/gif, image/jpg"
+                        accept="image/*"
                       />
                     </div>
                   </div>
                 </div>
               </div>
-              <button type="submit" class="btn btn-primary" id="guardarUsuario">Guardar</button>
+              <button type="submit" class="btn btn-primary" id="guardarUsuario">
+                Guardar
+              </button>
             </form>
           </div>
         </div>
