@@ -2,31 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const btnmode = document.getElementById("mode-toggle");
   let isEnabled = DarkReader.isEnabled();
   let selectedMode = localStorage.getItem("darkMode");
-  const imgJumbotrons = document.getElementsByClassName("jumbotron");
-
-  function imgDarkMode() {
-    for (let i = 0; i < imgJumbotrons.length; i++) {
-      imgJumbotrons[i].style.background = "url('../img/cover_back_black_mode.png')";
-      imgJumbotrons[i].style.height = "30vw";
-      imgJumbotrons[i].style.padding = "5em inherit";
-      imgJumbotrons[i].style.marginBottom = "0";
-      imgJumbotrons[i].style.backgroundSize = "cover";
-      imgJumbotrons[i].style.backgroundPosition = "center";
-      imgJumbotrons[i].style.backgroundRepeat = "no-repeat";
-    }
-  }
-
-  function imgLightMode() {
-    for (let i = 0; i < imgJumbotrons.length; i++) {
-      imgJumbotrons[i].style.background = "url('../img/cover_back.png')";
-      imgJumbotrons[i].style.height = "30vw";
-      imgJumbotrons[i].style.padding = "5em inherit";
-      imgJumbotrons[i].style.marginBottom = "0";
-      imgJumbotrons[i].style.backgroundSize = "cover";
-      imgJumbotrons[i].style.backgroundPosition = "center";
-      imgJumbotrons[i].style.backgroundRepeat = "no-repeat";
-    }
-  }
+  const imgJumbo = document.querySelector("#jumbotron");
 
   if (selectedMode === "true") {
     DarkReader.enable({
@@ -35,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
       sepia: 0,
     });
     isEnabled = true;
-    imgDarkMode();
+    imgJumbo.style.backgroundImage = "url(../img/cover_back_black_mode.png)";
   } else {
     DarkReader.disable();
     isEnabled = false;
@@ -54,14 +30,14 @@ document.addEventListener("DOMContentLoaded", function () {
   btnmode.addEventListener("click", () => {
     if (isEnabled) {
       DarkReader.disable();
-      imgLightMode();
+      imgJumbo.style.backgroundImage = "url(../img/cover_back.png)";
     } else {
       DarkReader.enable({
         brightness: 100,
         contrast: 90,
         sepia: 0,
       });
-      imgDarkMode();
+      imgJumbo.style.backgroundImage = "url(../img/cover_back_black_mode.png)";
     }
     isEnabled = !isEnabled;
     changeButton();
