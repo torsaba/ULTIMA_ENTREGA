@@ -22,5 +22,33 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector('input[name="apellido"]').value = apellido;
     document.querySelector('input[name="segundoApellido"]').value = segundoApellido;
     document.querySelector('input[name="telefono"]').value = telefono;
-  });
+
+    // Se agrega un evento clic al botón de guardar
+    const guardar = document.getElementById('guardarUsuario');
+    guardar.addEventListener("click", () => {
+
+      // Se obtienen los valores de los campos obligatorios 
+      const nombreUsuario = document.getElementById("nombre").value;
+      const segundoNombreUsuario = document.getElementById("segundoNombre").value;
+      const apellidoUsuario = document.getElementById("apellido").value;
+      const segundoApellidoUsuario = document.getElementById("segundoApellido").value;
+      const emailUsuario = document.getElementById("email").value;
+      const telefonoUsuario = document.getElementById("telefono").value;
   
+      // Confirma que los campos obligatorios tengan valor
+      if (!nombreUsuario || !apellidoUsuario || !emailUsuario) {
+        alert("Por favor, complete los campos obligatorios (*) antes de guardar.");
+        return; // No se guardan los datos si falta alguno de los campos obligatorios
+      }
+  
+      // Guarda los datos en el almacenamiento local
+      localStorage.setItem("nombre", nombreUsuario);
+      localStorage.setItem("segundoNombre", segundoNombreUsuario);
+      localStorage.setItem("apellido", apellidoUsuario);
+      localStorage.setItem("segundoApellido", segundoApellidoUsuario);
+      localStorage.setItem("email", emailUsuario);
+      localStorage.setItem("telefono", telefonoUsuario);
+
+      alert("Datos guardados exitosamente.");
+    });
+  });
