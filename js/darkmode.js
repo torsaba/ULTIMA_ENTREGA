@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
       DarkReader.disable();
       imgJumbo.classList.add("jumbotron")
       imgJumbo.classList.remove("jumbotronDark")
+
     } else {
       DarkReader.enable({
         brightness: 100,
