@@ -295,6 +295,7 @@ document
   .forEach((input) => {
     input.addEventListener("change", actualizarTotales);
   });
+
 document.getElementById("confirmarCompra").addEventListener("click", () => {
   validarCompra();
   document.querySelectorAll("form").forEach((form) => {
@@ -306,6 +307,7 @@ document.getElementById("confirmarCompra").addEventListener("click", () => {
   });
   confirmarCompra();
 });
+
 function confirmarCompra() {
   if (validarCompra()) {
     alert("Gracias por su compra");
