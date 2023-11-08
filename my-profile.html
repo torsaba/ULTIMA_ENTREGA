@@ -86,7 +86,7 @@
                     <i class="fa fa-shopping-cart"></i> Mi carrito</a
                   >
                 </li>
-                
+
                 <li>
                   <a id="mode-toggle" class="nav-link cursor-active">
                     <i class="fas fa-sun"></i> Modo Claro
@@ -104,52 +104,109 @@
         </div>
       </div>
     </nav>
-    
+
     <main>
       <div class="container">
         <div class="row">
           <div class="container mt-4">
             <h2>Perfil</h2>
-            <hr>
+            <hr />
             <form id="profile-form">
               <div class="row">
                 <div class="col-md-6">
                   <div class="mb-3">
-                    <label for="nombre" class="form-label">Primer nombre*</label>
-                    <input type="text" class="form-control" id="nombre" name="nombre" >
+                    <label for="nombre" class="form-label"
+                      >Primer nombre*</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="nombre"
+                      name="nombre"
+                    />
                   </div>
                   <div class="mb-3">
-                    <label for="apellido" class="form-label">Primer apellido*</label>
-                    <input type="text" class="form-control" id="apellido" name="apellido" >
+                    <label for="apellido" class="form-label"
+                      >Primer apellido*</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="apellido"
+                      name="apellido"
+                    />
                   </div>
                   <div class="mb-3">
                     <label for="email" class="form-label">E-mail*</label>
-                    <input type="email" class="form-control" id="email" name="email" value="correo@ejemplo.com" required readonly>
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="email"
+                      name="email"
+                      value="correo@ejemplo.com"
+                      required
+                      readonly
+                    />
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="mb-3">
-                    <label for="segundoNombre" class="form-label">Segundo nombre</label>
-                    <input type="text" class="form-control" id="segundoNombre" name="segundoNombre">
+                    <label for="segundoNombre" class="form-label"
+                      >Segundo nombre</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="segundoNombre"
+                      name="segundoNombre"
+                    />
                   </div>
                   <div class="mb-3">
-                    <label for="segundoApellido" class="form-label">Segundo apellido</label>
-                    <input type="text" class="form-control" id="segundoApellido" name="segundoApellido">
+                    <label for="segundoApellido" class="form-label"
+                      >Segundo apellido</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="segundoApellido"
+                      name="segundoApellido"
+                    />
                   </div>
                   <div class="mb-3">
-                    <label for="telefono" class="form-label">Teléfono de contacto</label>
-                    <input type="tel" class="form-control" id="telefono" name="telefono">
+                    <label for="telefono" class="form-label"
+                      >Teléfono de contacto</label
+                    >
+                    <input
+                      type="tel"
+                      class="form-control"
+                      id="telefono"
+                      name="telefono"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <div class="input-div">
+                      <p>
+                        Arrastre una imagen de perfil o
+                        <span class="browse">seleccione una</span>.
+                      </p>
+                      <input
+                        type="file"
+                        class="file"
+                        accept="image/png, image/jpeg, image/gif, image/jpg"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
               <button type="submit" class="btn btn-primary">Guardar</button>
             </form>
-            
           </div>
         </div>
       </div>
     </main>
-    
+
     <footer class="text-muted">
       <div class="container">
         <p class="float-end">
