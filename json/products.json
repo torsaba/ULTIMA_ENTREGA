@@ -1,0 +1,261 @@
+[{
+    "id": 50921,
+    "name": "Chevrolet Onix Joy",
+    "description": "Generación 2019, variedad de colores. Motor 1.0, ideal para ciudad.",
+    "cost": 13500,
+    "currency": "USD",
+    "soldCount": 14,
+    "category": "Autos",
+    "images": [
+        "img/prod50921_1.jpg",
+        "img/prod50921_2.jpg",
+        "img/prod50921_3.jpg",
+        "img/prod50921_4.jpg"
+    ],
+    "relatedProducts": [
+        {
+            "id":50924,
+            "name":"Peugeot 208",
+            "image": "img/prod50924_1.jpg"
+        },
+        {
+            "id":50922,
+            "name":"Fiat Way",
+            "image": "img/prod50922_1.jpg"
+        }
+    ]
+}, {
+    "id": 50922,
+    "name": "Fiat Way",
+    "description": "La versión de Fiat que brinda confort y a un precio accesible.",
+    "cost": 14500,
+    "currency": "USD",
+    "soldCount": 52,
+    "category": "Autos",
+    "images": [
+        "img/prod50922_1.jpg",
+        "img/prod50922_2.jpg",
+        "img/prod50922_3.jpg",
+        "img/prod50922_4.jpg"
+    ],
+    "relatedProducts": [
+        {
+            "id":50921,
+            "name":"Chevrolet Onix Joy",
+            "image": "img/prod50921_1.jpg"
+        },
+        {
+            "id":50923,
+            "name":"Suzuki Celerio",
+            "image": "img/prod50923_1.jpg"
+        }
+    ]
+},{
+    "id": 50923,
+    "name": "Suzuki Celerio",
+    "description": "Un auto que se ha ganado la buena fama por su economía con el combustible.",
+    "cost": 12500,
+    "currency": "USD",
+    "soldCount": 25,
+    "category": "Autos",
+    "images": [
+        "img/prod50923_1.jpg",
+        "img/prod50923_2.jpg",
+        "img/prod50923_3.jpg",
+        "img/prod50923_4.jpg"
+    ],
+    "relatedProducts": [
+        {
+            "id":50924,
+            "name":"Peugeot 208",
+            "image": "img/prod50924_1.jpg"
+        },
+        {
+            "id":50922,
+            "name":"Fiat Way",
+            "image": "img/prod50922_1.jpg"
+        }
+    ]
+},{
+    "id": 50924,
+    "name": "Peugeot 208",
+    "description": "El modelo de auto que se sigue renovando y manteniendo su prestigio en comodidad.",
+    "cost": 15200,
+    "currency": "USD",
+    "soldCount": 17,
+    "category": "Autos",
+    "images": [
+        "img/prod50924_1.jpg",
+        "img/prod50924_2.jpg",
+        "img/prod50924_3.jpg",
+        "img/prod50924_4.jpg"
+    ],
+    "relatedProducts": [
+        {
+            "id":50921,
+            "name":"Chevrolet Onix Joy",
+            "image": "img/prod50921_1.jpg"
+        },
+        {
+            "id":50923,
+            "name":"Suzuki Celerio",
+            "image": "img/prod50923_1.jpg"
+        }
+    ]
+},{
+    "id": 50925,
+    "name": "Bugatti Chiron",
+    "description": "El mejor hiperdeportivo de mundo. Producción limitada a 500 unidades.",
+    "cost": 3500000,
+    "currency": "USD",
+    "soldCount": 0,
+    "category": "Autos",
+    "images": [
+        "img/prod50925_1.jpg",
+        "img/prod50925_2.jpg",
+        "img/prod50925_3.jpg",
+        "img/prod50925_4.jpg"
+    ],
+    "relatedProducts": [
+        {
+            "id":50924,
+            "name":"Peugeot 208",
+            "image": "img/prod50924_1.jpg"
+        },
+        {
+            "id":50921,
+            "name":"Chevrolet Onix Joy",
+            "image": "img/prod50921_1.jpg"
+        }
+    ]
+},{
+    "id": 50741,
+    "name": "Oso de peluche",
+    "description": "Oso de peluche gigante, con el bebé. Resistente y lavable. Tus hijos los amarán",
+    "cost": 2400,
+    "currency": "UYU",
+    "soldCount": 97,
+    "category": "Juguetes",
+    "images": [
+        "img/prod50741_1.jpg",
+        "img/prod50741_2.jpg",
+        "img/prod50741_3.jpg",
+        "img/prod50741_4.jpg"
+    ],
+    "relatedProducts": [
+        {
+            "id":50742,
+            "name":"Pelota de básquetbol",
+            "image": "img/prod50742_1.jpg"
+        },
+        {
+            "id":50744,
+            "name":"Bicicleta",
+            "image": "img/prod50744_1.jpg"
+        }
+    ]
+},{
+    "id": 50742,
+    "name": "Pelota de básquetbol",
+    "description": "Balón de baloncesto profesional, para interiores, tamaño 5, 27.5 pulgadas. Oficial de la NBA",
+    "cost": 2999,
+    "currency": "UYU",
+    "soldCount": 11,
+    "category": "Juguetes",
+    "images": [
+        "img/prod50742_1.jpg",
+        "img/prod50742_2.jpg",
+        "img/prod50742_3.jpg",
+        "img/prod50742_4.jpg"
+    ],
+     "relatedProducts": [
+        {
+            "id":50741,
+            "name":"Oso de peluche",
+            "image": "img/prod50741_1.jpg"
+        },
+        {
+            "id":50743,
+            "name":"PlayStation 5",
+            "image": "img/prod50743_1.jpg"
+        }
+    ]
+},{
+    "id": 50743,
+    "name": "PlayStation 5",
+    "description": "Maravíllate con increíbles gráficos y disfruta de nuevas funciones de PS5. Con E/S integrada.",
+    "cost": 59999,
+    "currency": "UYU",
+    "soldCount": 16,
+    "category": "Juguetes",
+    "images": [
+        "img/prod50743_1.jpg",
+        "img/prod50743_2.jpg",
+        "img/prod50743_3.jpg",
+        "img/prod50743_4.jpg"
+    ],
+    "relatedProducts": [
+        {
+            "id": 50742,
+            "name": "Pelota de básquetbol",
+            "image": "img/prod50742_1.jpg"
+        },
+        {
+            "id": 50744,
+            "name": "Bicicleta",
+            "image": "img/prod50744_1.jpg"
+        }
+    ]
+},{
+    "id": 50744,
+    "name": "Bicicleta",
+    "description": "¡La mejor BMX pequeña del mercado! Frenos traseros y cuadro duradero de acero Hi-Ten.",
+    "cost": 10999,
+    "currency": "UYU",
+    "soldCount": 8,
+    "category": "Juguetes",
+    "images": [
+        "img/prod50744_1.jpg",
+        "img/prod50744_2.jpg",
+        "img/prod50744_3.jpg",
+        "img/prod50744_4.jpg"
+    ],
+    "relatedProducts": [
+        {
+            "id":50741,
+            "name":"Oso de peluche",
+            "image": "img/prod50741_1.jpg"
+        },
+        {
+            "id":50743,
+            "name":"PlayStation 5",
+            "image": "img/prod50743_1.jpg"
+        }
+    ]
+},{
+    "id": 40281,
+    "name": "Computadora de escritorio",
+    "description": "Computadora de escritorio. Potencia y rendimiento, para juegos o trabajo",
+    "cost": 2599,
+    "currency": "USD",
+    "soldCount": 11,
+    "category": "Computadoras",
+    "images": [
+        "img/prod40281_1.jpg",
+        "img/prod40281_2.jpg",
+        "img/prod40281_3.jpg",
+        "img/prod40281_4.jpg"
+    ],
+    "relatedProducts": [
+        {
+            "id":50743,
+            "name":"PlayStation 5",
+            "image": "img/prod50743_1.jpg"
+        },
+        {
+            "id":50744,
+            "name":"Bicicleta",
+            "image": "img/prod50744_1.jpg"
+        }
+    ]
+}]
