@@ -1,9 +1,9 @@
 const CATEGORIES_URL = "http://localhost:3000/cats";
 const PUBLISH_PRODUCT_URL = "https://japceibal.github.io/emercado-api/sell/publish.json";
-const PRODUCTS_URL = "https://japceibal.github.io/emercado-api/cats_products/";
-const PRODUCT_INFO_URL = "https://japceibal.github.io/emercado-api/products/";
-const PRODUCT_INFO_COMMENTS_URL = "https://japceibal.github.io/emercado-api/products_comments/";
-const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/";
+const PRODUCTS_URL = `https://localhost:3000/cats_products/${id}.json`;
+const PRODUCT_INFO_URL = `https://localhost:3000/products/${id}.json`;
+const PRODUCT_INFO_COMMENTS_URL = `https://localhost:3000/products_comments/${id}.json`;
+const CART_INFO_URL = "";
 const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
 const EXT_TYPE = ".json";
 
