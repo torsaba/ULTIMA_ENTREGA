@@ -41,10 +41,11 @@
                   <div class="form">
                     <!-- Campo de correo electrónico -->
                     <div class="form-group m-3">
+                      <form action="/login" method="post">
                       <label for="email">E-Mail</label>
                       <input
                         type="email"
-                        name="email"
+                        name="user"
                         class="form-control"
                         placeholder="Usuario o email"
                         required
@@ -120,6 +121,9 @@
                               <span class="label-text">Recordarme</span>
                             </label>
                           </div>
+                          <div id="msgError" class="d-none text-danger">
+                              Usuario o contraseña incorrecta
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -133,6 +137,7 @@
                           <polyline points="8 1 12 5 8 9"></polyline>
                         </svg>
                       </button>
+                    </form>
                     </div>
                   </div>
                 </div>

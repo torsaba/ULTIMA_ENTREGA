@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   // Obtener el nombre de usuario guardado
-  const username = localStorage.getItem("username");
+  const username = localStorage.getItem("savedEmail");
   // Obtener el elemento donde se mostrará el nombre de usuario
   const usernameDisplay = document.getElementById("username-display");
   // Obtener el botón de cerrar sesión
