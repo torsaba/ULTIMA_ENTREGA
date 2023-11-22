@@ -3,7 +3,8 @@ const fs = require("fs"); //Se importa el módulo 'fs' (File System) para trabaj
 const path = require("path"); // Se importa el módulo 'path' para manipular rutas de archivos y directorios
 const app = express(); // Instancia de express
 const jwt = require("jsonwebtoken"); // Importa la librería jsonwebtoken
-const cors = require("cors")
+const cors = require("cors");
+const mariadb = require("mariadb");
 
 app.use(express.json());
 app.use(cors());
@@ -96,10 +97,9 @@ app.get("/json/:subfolder/:filename?", (req, res) => {
   }
 });
 
-const SECRET_KEY = 'tu-clave-secreta'; // Cambia esto con tu clave secreta
-// Middleware de autorización
+const SECRET_KEY = "clave" // Middleware de autorización
 const authorizeMiddleware = (req, res, next) => {
-  const token = req.headers.authorization;
+  const token = req.headers['access-token'];
 
   if (!token) {
     return res.status(401).json({ error: 'Token no proporcionado' });
@@ -117,18 +117,48 @@ const authorizeMiddleware = (req, res, next) => {
 
 app.post('/login', (req, res) => {
   const { user, password } = req.body;
-
   
   if (user === 'admin@admin.com' && password === 'admin123') {
-    const token = jwt.sign({ user }, SECRET_KEY, { expiresIn: '1h' });
-
+    const token = jwt.sign({ user }, SECRET_KEY);
     res.json({ token, user });
   } else {
     res.status(401).json({ error: 'Credenciales incorrectas' });
   }
 });
 
-app.use("/index", authorizeMiddleware)
+app.get('/cart', (req, res) => {
+  const user = req.user;
+
+  // Lógica para la ruta /cart aquí
+
+  res.json({ message: 'Ruta /cart accesible solo para usuarios autenticados', user });
+});
+
+
+global.pool = mariadb.createPool({
+  host: 'localhost',
+  user: 'root',
+  password: '12345',
+  database: 'carrito',
+  connectionLimit: 50
+ });
+ 
+ app.post('/guardarDatos', async (req, res) => {
+  try {
+     const { name, img, cost, moneda } = req.body;
+ 
+     const conn = await pool.getConnection();
+     await conn.query('INSERT INTO carttest (name, img, cost, moneda) VALUES (?, ?, ?, ?)', [name, img, cost, moneda]);
+     conn.release();
+ 
+     res.status(200).json({ message: 'Datos guardados correctamente' });
+  } catch (error) {
+     console.error('Error al guardar datos:', error);
+     res.status(500).json({ error: 'Hubo un problema al guardar los datos' });
+  }
+ });
+
+app.use("/index", authorizeMiddleware);
 app.use("/cart", authorizeMiddleware);
 app.use("/js", express.static(path.join(__dirname, "js")));
 app.use("/css", express.static(path.join(__dirname, "css")));

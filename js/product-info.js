@@ -88,6 +88,32 @@ function chargeProductInfo(data) {
     const toastLiveExample = document.getElementById("liveToast");
     const toastBootstrap = new bootstrap.Toast(toastLiveExample);
     toastBootstrap.show();
+
+
+
+    const datos = { 
+      name: ObjProd.name, 
+      img: ObjProd.image, 
+      cost: ObjProd.cost, 
+      moneda: ObjProd.currency
+    };
+    fetch("http://localhost:3000/guardarDatos", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(datos),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Datos enviados correctamente:", data);
+      })
+      .catch((error) => {
+        console.error("Hubo un problema al enviar los datos:", error);
+      });
   });
 
   title.textContent = data.name;
