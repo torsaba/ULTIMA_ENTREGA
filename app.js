@@ -14,6 +14,7 @@ app.use(cors()); // Se inicializa cors
 const puerto = 3000; // Indico puerto al que va a escuchar
 let cats = require("./json/./cats/cat.json"); // Utilizo la ruta al archivo JSON
 
+// (consigna 1 (tambien esta agregada la funcionalidad de ver en formato web con .html))
 /* Estos get funcionan con los archivos .json y muestran la info del json en la web
  (formato .json, no formato web) */
 app.get("/", (req, res) => {
@@ -127,11 +128,12 @@ app.get("/test", authorizeMiddleware, (req, res) => {
   res.status(200).json({message: "Bien"});
 });
 
+// (consigna 3)
 app.get("/cart", authorizeMiddleware, (req, res) => {
   res.status(200).json({message: "Usuario autorizado"});
 })
 
-// Post para la autentificacion del usuario
+// Post para la autentificacion del usuario (consigna 2)
 app.post("/login", (req, res) => {
   const { user, password } = req.body;
 
@@ -145,7 +147,8 @@ app.post("/login", (req, res) => {
 
 
 
-// Base de datos en mariaDB, si no la tenemos no funciona ingresar los items del carrito en la bbdd
+/* Base de datos en mariaDB, si no la tenemos no funciona ingresar los items del carrito en la bbdd
+   (consigna 4)*/
 global.pool = mariadb.createPool({
   host: "localhost",
   user: "root",
@@ -175,7 +178,9 @@ app.post("/guardarDatos", async (req, res) => {
 });
 
 /* Los .use con authorizeMiddleware validan la aut. del usuario,
- y los express.static trabaja con los recursos estáticos para darle FORMATO WEB a las paginas */
+ y los express.static trabajan con los recursos estáticos para darle FORMATO WEB a las paginas
+ o endpoints con .html, solo los usuarios autorizados previamente en el post de /login 
+ con user = admin@admin.com y password = admin123 pueden entrar luego al get de /cart (consigna 3) */
 app.use("/test", authorizeMiddleware);
 app.use("/index", authorizeMiddleware);
 app.use("/cart", authorizeMiddleware);
