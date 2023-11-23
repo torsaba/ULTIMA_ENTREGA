@@ -106,7 +106,8 @@ app.get("/json/:subfolder/:filename?", (req, res) => {
 // JWT, secretKey y authorizeMiddleware para la autentificacion de login y el ingreso a la web
 const SECRET_KEY = "clave"; // Middleware de autorización
 const authorizeMiddleware = (req, res, next) => {
-  const token = req.headers["access-token"];
+  const authHeader = req.headers.authorization;
+  const token = authHeader && authHeader.split(' ')[1]
 
   if (!token) {
     return res.status(401).json({ error: "Token no proporcionado" });
@@ -122,6 +123,14 @@ const authorizeMiddleware = (req, res, next) => {
   });
 };
 
+app.get("/test", authorizeMiddleware, (req, res) => {
+  res.status(200).json({message: "Bien"});
+});
+
+app.get("/cart", authorizeMiddleware, (req, res) => {
+  res.status(200).json({message: "Usuario autorizado"});
+})
+
 // Post para la autentificacion del usuario
 app.post("/login", (req, res) => {
   const { user, password } = req.body;
@@ -134,17 +143,7 @@ app.post("/login", (req, res) => {
   }
 });
 
-// Get que permite ingresar con la aut. del usuario
-app.get("/cart", (req, res) => {
-  const user = req.user;
 
-  // Lógica para la ruta /cart aquí
-
-  res.json({
-    message: "Ruta /cart accesible solo para usuarios autenticados",
-    user,
-  });
-});
 
 // Base de datos en mariaDB, si no la tenemos no funciona ingresar los items del carrito en la bbdd
 global.pool = mariadb.createPool({
@@ -177,6 +176,7 @@ app.post("/guardarDatos", async (req, res) => {
 
 /* Los .use con authorizeMiddleware validan la aut. del usuario,
  y los express.static trabaja con los recursos estáticos para darle FORMATO WEB a las paginas */
+app.use("/test", authorizeMiddleware);
 app.use("/index", authorizeMiddleware);
 app.use("/cart", authorizeMiddleware);
 app.use("/js", express.static(path.join(__dirname, "js")));
